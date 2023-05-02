@@ -1,30 +1,53 @@
-import {el, mount } from 'redom';
-import Navigo from 'navigo'; 
+import { el, mount } from "redom";
+import Navigo from "navigo";
 import pageLogOut from "./logOut/logout";
 
+const body = document.querySelector("#root");
+const router = new Navigo("/");
 
-const router = new Navigo('/login');
+router
 
-
-
-router.on('/',  () => {
-  const body = document.querySelector('#root')
-  const h2 = el('h2', 'hello')
-  mount(body, h2)
-});
-
-router.on('/login',  () => {
-  render()
-});
+  .on("login", () => {
+    clear();
+    render();
+  })
+  .on("list", () => {
+    clear();
+    const h2 = el("h2", "list");
+    mount(body, h2);
+  })
+  .on("/account", () => {
+    clear();
+    const h2 = el("h2", "account");
+    mount(body, h2);
+  })
+  .on("balance", () => {
+    clear();
+    const h2 = el("h2", "balance");
+    mount(body, h2);
+  })
+  .on("currence", () => {
+    clear();
+    const h2 = el("h2", "curency");
+    mount(body, h2);
+  })
+  .on("location", () => {
+    clear();
+    const h2 = el("h2", "location");
+    mount(body, h2);
+  })
+  .on("/", () => {
+    clear();
+    const h2 = el("a", { href: "list", "data-navigo": true }, "kkk");
+    mount(body, h2);
+  })
+  .resolve();
 
 function render() {
-
   const logOut = pageLogOut();
-  const body = document.querySelector('#root')
-
-  mount(body, logOut)
+  mount(body, logOut);
 }
 
-
-router.resolve()
-
+function clear() {
+  body.innerHTML = "";
+}
