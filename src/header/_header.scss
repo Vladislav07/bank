@@ -1,0 +1,12 @@
+@import '../mixin';
+@import '../var';
+
+.header {
+  margin-bottom: 262px;
+  
+  &__container {
+    @include container;
+    background-color: $brand-primary;
+    height: 100px;
+  }
+}

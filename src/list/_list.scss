@@ -1,0 +1,8 @@
+@import '../mixin';
+
+.register {
+  &__container {
+    @include container;
+    
+  }
+}

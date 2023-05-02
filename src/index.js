@@ -1,14 +1,22 @@
 import { el, mount } from "redom";
 import Navigo from "navigo";
-import './_base.scss'
+import "./_base.scss";
 import pageLogOut from "./logOut/logout";
+import header from "./header/header";
+import list from "./list/list";
 
 const body = document.querySelector("#root");
+
+function beforeRouter() {
+  mount(body, header());
+}
+
 const router = new Navigo("/", { hash: true });
 const render = (content) => {
   clear();
+  beforeRouter();
   mount(body, content);
-}
+};
 // window.sessionId = -1;
 
 // router.hooks({
@@ -26,10 +34,8 @@ router
   .on("login", () => {
     render(pageLogOut());
   })
-  .on("list", () => {
-    clear();
-    const h2 = el("h2", "list");
-    mount(body, h2);
+  .on("/", () => {
+    render(list());
   })
   .on("account", () => {
     clear();
@@ -51,13 +57,12 @@ router
     const h2 = el("h2", "location");
     mount(body, h2);
   })
-  .on("/", () => {
+  .on("c", () => {
     clear();
     const h2 = el("a", { href: "login", "data-navigo": true }, "kkk");
     mount(body, h2);
   })
   .resolve();
-
 
 function clear() {
   body.innerHTML = "";
