@@ -44,13 +44,13 @@ export class Group {
 
 export class SectionTitle {
   constructor(text, className) {
-    this.el = el(`h1.${className}`, text);
+    this.el = el(`h1.${className}__title`, text);
   }
 }
 
 export class Select{
   constructor(name, className) {
-    this.el = el(`Select.${className}`, {
+    this.el = el(`Select.${className}__select`, {
       id:name,
       name:name
     });
@@ -66,4 +66,12 @@ export class Btn {
   }
 }
 
+export class Link {
+  constructor(path, text, className){
+    this.el = el(`a.${className}__btn`,{
+      href:path,
+      'data-navigo':true,
+    }, text)
+  }
+}
 

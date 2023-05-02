@@ -6,6 +6,8 @@ const user = {
   password: "skillbox",
 };
 
+let token='';
+
 export async function authorizationRequest() {
   try {
     console.log("authorizationRequest");
@@ -21,8 +23,7 @@ export async function authorizationRequest() {
       if (data.error) {
         throw new Error(data.error);
       } else {
-        const token = data.payload.token;
-        console.log(token);
+        token = data.payload.token;
         return token;
       }
     }

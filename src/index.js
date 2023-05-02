@@ -1,4 +1,4 @@
-import { el, mount } from "redom";
+import { el, mount, setChildren } from "redom";
 import Navigo from "navigo";
 import "./_base.scss";
 import pageLogOut from "./logOut/logout";
@@ -6,6 +6,7 @@ import header from "./header/header";
 import list from "./list/list";
 
 const body = document.querySelector("#root");
+
 
 function beforeRouter() {
   mount(body, header());
@@ -15,7 +16,7 @@ const router = new Navigo("/", { hash: true });
 const render = (content) => {
   clear();
   beforeRouter();
-  mount(body, content);
+  mount(body,content);
 };
 // window.sessionId = -1;
 
@@ -31,10 +32,10 @@ const render = (content) => {
 // });
 
 router
-  .on("login", () => {
+  .on("/", () => {
     render(pageLogOut());
   })
-  .on("/", () => {
+  .on("/list", () => {
     render(list());
   })
   .on("account", () => {
@@ -57,9 +58,9 @@ router
     const h2 = el("h2", "location");
     mount(body, h2);
   })
-  .on("c", () => {
+  .on("/fff", () => {
     clear();
-    const h2 = el("a", { href: "login", "data-navigo": true }, "kkk");
+    const h2 = el("a", { href: "list", "data-navigo": true }, "kkk");
     mount(body, h2);
   })
   .resolve();
@@ -67,3 +68,5 @@ router
 function clear() {
   body.innerHTML = "";
 }
+
+export {router as default}

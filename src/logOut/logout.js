@@ -1,5 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import "./_logOut.scss";
+import{authorizationRequest} from '../utils/server_access';
+import router from '../index'
 import {
   Page,
   Section,
@@ -7,6 +9,7 @@ import {
   CustomInput,
   Group,
   FormLabel,
+  Btn,
 } from "../base/base";
 
 function pageLogOut() {
@@ -17,12 +20,20 @@ function pageLogOut() {
     id: "form-logOut",
   });
 
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    authorizationRequest().then((token)=>{
+      alert(token);
+      router.navigate('/list');
+    })
+  })
+
   const fieldLogin = new CustomInput("text", "login", "logOut__input");
   const fieldPassword = new CustomInput("text", "password", "logOut__input");
   const labelLogin = new FormLabel("Логин", "logOut__label");
   const labelPassword = new FormLabel("Пароль", "logOut__label");
 
-  const btn = el("buttun.logOut__btn", "Войти");
+  const btn = new Btn("Войти", 'submit', "logOut");
   setChildren(form, [
     el("h2.logOut__title", "Вход в аккаунт"),
     labelLogin,

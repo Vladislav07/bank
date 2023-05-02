@@ -1,8 +1,29 @@
 @import '../mixin';
+@import '../var';
 
 .register {
   &__container {
-    @include container;
-    
+    @include container; 
+    padding: 50px;  
+  }
+
+  &__group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  &__title {
+    @include title;
+  }
+
+  &__select{
+    margin-right: auto;
+  }
+
+  &__btn {
+    @include btn;
+    background-color: $brand-primary;
+    color: #fff;
   }
 }
