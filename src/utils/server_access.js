@@ -58,8 +58,8 @@ export async function listOfUserAccounts() {
   }
 }
 
-export async function accountDetails(token, Account) {
-  const idAccount = Account[0].account;
+export async function accountDetails(idAccount) {
+  //const idAccount = Account[0].account;
   try {
     console.log("accountDetails");
     const res = await fetch(`http://localhost:3000/account/${idAccount}`, {

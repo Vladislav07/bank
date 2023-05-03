@@ -1,7 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import "./_list.scss";
 import { listOfUserAccounts } from "../utils/server_access";
-import getAccount from "../account/account";
+import getCard from "../card/card";
 import {
   Page,
   Section,
@@ -30,7 +30,7 @@ function pageList() {
     data.map((card) => {
       mount(
         container,
-        getAccount(
+        getCard(
           card.account,
           card.balance,
           card.transactions.length > 0 ? card.transactions[0].date : ""

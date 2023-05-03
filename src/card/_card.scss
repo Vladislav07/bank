@@ -1,0 +1,64 @@
+@import "../mixin";
+@import "../var";
+
+.card {
+  width: 400px;
+  border-radius: 9px;
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  padding: 22px;
+  display: grid;
+  grid-row: repeat(3, "maxcontent");
+  grid-column: 1fr 1fr;
+  row-gap: 9px;
+  justify-content: flex-start;
+
+  &__number {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    color: $brand-secondary_black;
+  }
+
+  &__balance {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: $brand-secondary_black;
+  }
+
+  &__group {
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  &__label {
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  &__transaction {
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 300;
+    color: #000;
+  }
+
+  &__btn {
+    grid-row: 3;
+    grid-column: 2;
+    margin: 0 auto;
+    @include btn;
+    background-color: $brand-primary;
+    color: #ffffff;
+  }
+}

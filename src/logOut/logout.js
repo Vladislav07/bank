@@ -1,6 +1,6 @@
 import { el, mount, setChildren } from "redom";
 import "./_logOut.scss";
-import{authorizationRequest} from '../utils/server_access';
+import { authorizationRequest } from '../utils/server_access';
 import router from '../index'
 import {
   Page,
@@ -20,10 +20,9 @@ function pageLogOut() {
     id: "form-logOut",
   });
 
-  form.addEventListener('submit', (e)=>{
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    authorizationRequest().then((token)=>{
-      alert(token);
+    authorizationRequest().then(() => {
       router.navigate('/list');
     })
   })

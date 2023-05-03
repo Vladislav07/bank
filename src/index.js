@@ -38,7 +38,7 @@ router
   .on("/list", () => {
     render(list());
   })
-  .on("account", () => {
+  .on("account/{id}", () => {
     clear();
     const h2 = el("h2", "account");
     mount(body, h2);
