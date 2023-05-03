@@ -1,6 +1,6 @@
 import { el, mount, setChildren } from "redom";
 import "./_account.scss";
-import { Btn } from "../base/base";
+import { Btn, Group } from "../base/base";
 
 function getAccount(number, balance, lastDate) {
   const prefix = "account";
@@ -8,7 +8,11 @@ function getAccount(number, balance, lastDate) {
   setChildren(account, [
     el(`h3.${prefix}__number`, number),
     el(`span.${prefix}__balance`, `${balance} руб.`),
-    el(`h3.${prefix}__transaction`, `Последняя транзакция:`),
+    new Group(prefix,
+       [el(`span.${prefix}__label`, `Последняя транзакция:`),
+       el(`span.${prefix}__transaction`, lastDate),
+      ]),
+
     new Btn("Открыть", "button", prefix),
   ])
 

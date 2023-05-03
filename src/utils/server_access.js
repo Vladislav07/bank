@@ -24,6 +24,7 @@ export async function authorizationRequest() {
         throw new Error(data.error);
       } else {
         token = data.payload.token;
+        console.log(token);
         return token;
       }
     }
@@ -32,7 +33,7 @@ export async function authorizationRequest() {
   }
 }
 
-export async function listOfUserAccounts(token) {
+export async function listOfUserAccounts() {
   try {
     console.log("listOfUserAccounts");
     const res = await fetch("http://localhost:3000/accounts", {
@@ -47,8 +48,9 @@ export async function listOfUserAccounts(token) {
       if (data.error) {
         throw new Error(data.error);
       } else {
+       console.log(data.payload);
         return data.payload;
-        console.log(data.payload);
+
       }
     }
   } catch (error) {

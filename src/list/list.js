@@ -1,7 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import "./_list.scss";
-import { listOfUserAccounts } from '../utils/server_access';
-import getAccount from '../account/account'
+import { listOfUserAccounts } from "../utils/server_access";
+import getAccount from "../account/account";
 import {
   Page,
   Section,
@@ -15,7 +15,6 @@ import {
 } from "../base/base";
 
 function pageList() {
-
   const prefix = "register";
   const page = new Page(prefix);
   const container = new Container(prefix);
@@ -26,14 +25,19 @@ function pageList() {
       new Btn("+ Создать новый счет", "button", prefix),
     ]),
   ]);
-  listOfUserAccounts().then(data => {
+
+  listOfUserAccounts().then((data) => {
     data.map((card) => {
-      mount(container,
-        getAccount(card.account,
+      mount(
+        container,
+        getAccount(
+          card.account,
           card.balance,
-          card.transaction[0].date))
-    })
-  })
+          card.transactions.length > 0 ? card.transactions[0].date : ""
+        )
+      );
+    });
+  });
   mount(page, container);
   return page;
 }
