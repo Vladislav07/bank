@@ -74,7 +74,7 @@ export async function accountDetails(idAccount) {
       if (data.error) {
         throw new Error(data.error);
       } else {
-        console.log(data.payload.balance);
+        return data.payload;
       }
     }
   } catch (error) {

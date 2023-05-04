@@ -1,7 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import "./_account.scss";
-import { listOfUserAccounts } from "../utils/server_access";
-import {getFormCreateAccount} from "./createAccount"
+import createTransaction from "./createTransaction"
+import {accountDetails} from '../utils/server_access'
 import {
   Page,
   Section,
@@ -14,7 +14,8 @@ import {
   Btn,
 } from "../base/base";
 
-function getAccount(account) {
+function detailsAccount(number) {
+  const accountInfo = accountDetails(number)
   const prefix = "account";
   const accountPage = new Page(prefix);
   const container = new Container(prefix);
@@ -22,16 +23,13 @@ function getAccount(account) {
     new Group(prefix, [
       new SectionTitle("Ваши счета", prefix),
       new Btn("+ Создать новый счет", "button", prefix),
-      el(`h3.${prefix}__number`, account.number),
-      el(`span.${prefix}__balance`, `${balance} руб.`),
+      el(`h3.${prefix}__number`, number),
+    //  el(`span.${prefix}__balance`, `${balance} руб.`),
     ]),
   ]),
-  getFormCreateAccount();
-
-    
-  
+createTransaction(prefix)
 
   return accountPage;
 }
 
-export { getAccount as default };
+export { detailsAccount as default };

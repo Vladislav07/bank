@@ -1,13 +1,13 @@
 import { el, mount, setChildren } from "redom";
 import "./_account.scss";
-import {createaAccount} from '../utils/server_access';
+//import {} from '../utils/server_access';
 import {
   CustomInput,
   FormLabel,
   Btn,
 } from "../base/base";
 
-function getFormCreateAccount(prefix) {
+function createTransaction(prefix) {
 
   const form = el(`form.${prefix}__form.form`, {
     id: `form-${prefix}`,
@@ -15,7 +15,7 @@ function getFormCreateAccount(prefix) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    createaAccount();
+
   })
 
   const fieldNumber = new CustomInput("text", "login", `${prefix}__input`);
@@ -35,4 +35,4 @@ function getFormCreateAccount(prefix) {
   return form;
 }
 
-export { getFormCreateAccount as default }
+export { createTransaction as default }

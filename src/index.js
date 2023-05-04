@@ -4,9 +4,9 @@ import "./_base.scss";
 import pageLogOut from "./logOut/logout";
 import header from "./header/header";
 import list from "./list/list";
+import detailsAccount from "./account/account";
 
 const body = document.querySelector("#root");
-
 
 function beforeRouter() {
   mount(body, header());
@@ -16,7 +16,7 @@ const router = new Navigo("/", { hash: true });
 const render = (content) => {
   clear();
   beforeRouter();
-  mount(body,content);
+  mount(body, content);
 };
 // window.sessionId = -1;
 
@@ -38,10 +38,9 @@ router
   .on("/list", () => {
     render(list());
   })
-  .on("account/{id}", () => {
-    clear();
-    const h2 = el("h2", "account");
-    mount(body, h2);
+  .on("/account/:id", ({ data: { id } }) => {
+    console.log(id);
+    //render(detailsAccount(did));
   })
   .on("balance", () => {
     clear();
@@ -69,4 +68,4 @@ function clear() {
   body.innerHTML = "";
 }
 
-export {router as default}
+export { router as default };
