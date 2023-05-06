@@ -1,0 +1,13 @@
+@import '../mixin';
+@import '../var';
+
+.currency {
+  &__container {
+    @include container;
+    padding: 50px;
+  }
+
+  &__title {
+    @include title;
+  }
+}

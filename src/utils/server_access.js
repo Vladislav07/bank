@@ -188,19 +188,3 @@ export async function currencyBuy(token, exchange) {
   }
 }
 
-export function webSocketStrim() {
-  const socket = new WebSocket("ws://localhost:3000/currency-feed");
-  socket.onopen = function () {
-    console.log("Соединение установлено.");
-  };
-
-  socket.onmessage = function (event) {
-    const incomingMessage = event.data;
-    console.log(incomingMessage);
-  };
-
-  setTimeout(() => {
-    socket.send("close");
-    console.log("close");
-  }, 5000);
-}

@@ -89,7 +89,13 @@ export class TitleSection {
 }
 
 export class RowTable {
-  constructor(className) {
-    this.el(el(`tr.${className}__row`));
+  constructor(className, element) {
+    this.el = el(`tr.${className}__row`, [
+      el(`td.${className}__value`, element.from),
+      el(`td.${className}__value`, element.to),
+      el(`td.${className}__value`, element.amount),
+      el(`td.${className}__value`, element.date),
+    ]
+    );
   }
 }

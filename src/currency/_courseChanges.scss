@@ -1,0 +1,14 @@
+@import '../mixin';
+@import '../var';
+
+.rate {
+  &__container {
+    @include container;
+    padding: 50px;
+    background-color: #E5E5E5;
+  }
+
+  &__title {
+    @include title;
+  }
+}

@@ -5,6 +5,7 @@ import pageLogOut from "./logOut/logout";
 import header from "./header/header";
 import list from "./list/list";
 import detailsAccount from "./account/account";
+import pageCurrency from './currency/currency'
 
 const body = document.querySelector("#root");
 
@@ -47,10 +48,8 @@ router
     const h2 = el("h2", "balance");
     mount(body, h2);
   })
-  .on("currence", () => {
-    clear();
-    const h2 = el("h2", "curency");
-    mount(body, h2);
+  .on("/currency", () => {
+    render(pageCurrency())
   })
   .on("location", () => {
     clear();

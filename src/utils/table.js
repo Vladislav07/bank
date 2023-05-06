@@ -1,29 +1,30 @@
 import { el, mount, setChildren } from "redom";
-import './_table.scss';
+import { RowTable } from "../base/base";
+import "./_table.scss";
 
 function getTable(transactions, prefix) {
-
-  const table = el(`table.${prefix}__table.table`)
-  const tHead = el('thead.table__header')
-  const headerRow = el('tr.table__row')
-  const tBody = el('thead.table__body')
+  const table = el(`table.${prefix}__table.table`);
+  const tHead = el("thead.table__header");
+  const headerRow = el("tr.table__title");
+  const tBody = el("tbody.table__body");
 
   setChildren(headerRow, [
-    el('th.table__title-column', 'счет отправителя'),
-    el('th.table__title-column', 'счет получателя'),
-    el('th.table__title-column', 'сумма'),
-    el('th.table__title-column', 'дата'),
-  ]
-  )
+    el("th.table__title-column", "счет отправителя"),
+    el("th.table__title-column", "счет получателя"),
+    el("th.table__title-column", "сумма"),
+    el("th.table__title-column", "дата"),
+  ]);
 
-  const records = transactions.forEach(element => {
-    
-  });
+  mount(tHead, headerRow);
 
-  mount(tHead, headerRow)
-  setChildren(table, [
-    tHead, tBody
-  ])
+  setChildren(
+    tBody,
+    transactions.slice(1, 4).map((element) => {
+      return new RowTable(prefix, element);
+    })
+  );
+  mount(table, tHead);
+  mount(table, tBody);
   return table;
 }
 
