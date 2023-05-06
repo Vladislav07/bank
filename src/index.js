@@ -40,7 +40,7 @@ router
   })
   .on("/account/:id", ({ data: { id } }) => {
     console.log(id);
-    //render(detailsAccount(did));
+    render(detailsAccount(id));
   })
   .on("balance", () => {
     clear();

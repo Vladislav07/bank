@@ -48,30 +48,48 @@ export class SectionTitle {
   }
 }
 
-export class Select{
+export class Select {
   constructor(name, className) {
     this.el = el(`Select.${className}__select`, {
-      id:name,
-      name:name
+      id: name,
+      name: name,
     });
   }
 }
 
 export class Btn {
   constructor(text, type, className) {
-    this.el = el(`button.${className}__btn`, {
-     type,
-    },
-     text);
+    this.el = el(
+      `button.${className}__btn`,
+      {
+        type: type,
+      },
+      text
+    );
   }
 }
 
 export class Link {
-  constructor(path, text, className){
-    this.el = el(`a.${className}__btn`,{
-      href:path,
-      'data-navigo':true,
-    }, text)
+  constructor(path, text, className) {
+    this.el = el(
+      `a.${className}__btn`,
+      {
+        href: path,
+        "data-navigo": true,
+      },
+      text
+    );
   }
 }
 
+export class TitleSection {
+  constructor(text, className) {
+    this.el = el(`h2.${className}__title`, text);
+  }
+}
+
+export class RowTable {
+  constructor(className) {
+    this.el(el(`tr.${className}__row`));
+  }
+}

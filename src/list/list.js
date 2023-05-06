@@ -27,10 +27,11 @@ function pageList() {
   ]);
 
   listOfUserAccounts().then((data) => {
-    data.map((card) => {
+    data.forEach((card) => {
       mount(
         container,
         getCard(
+          prefix,
           card.account,
           card.balance,
           card.transactions.length > 0 ? card.transactions[0].date : ""
@@ -38,7 +39,11 @@ function pageList() {
       );
     });
   });
+
   mount(page, container);
+
+
+  
   return page;
 }
 

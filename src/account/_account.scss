@@ -3,17 +3,17 @@
 
 .account {
   &__container {
-    @include container; 
-    padding: 50px;  
+    @include container;
+    padding: 50px;
   }
 
   &__group {
     display: grid;
     grid-template-rows: max-content max-content;
     grid-template-columns: 1fr 1fr;
-
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    margin-bottom: 50px;
   }
 
   &__title {

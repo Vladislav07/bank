@@ -1,29 +1,29 @@
 import { el, mount, setChildren } from "redom";
+import "./_form.scss";
 import "./_account.scss";
+
 //import {} from '../utils/server_access';
-import {
-  CustomInput,
-  FormLabel,
-  Btn,
-} from "../base/base";
+import { CustomInput, FormLabel, Btn } from "../base/base";
 
 function createTransaction(prefix) {
-
   const form = el(`form.${prefix}__form.form`, {
     id: `form-${prefix}`,
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+  });
 
-  })
+  const fieldNumber = new CustomInput("text", "login", `${prefix}__input.form__input`);
+  const fieldAmount = new CustomInput("text", "password", `${prefix}__input.form__input`);
+  const labelNumber = new FormLabel(
+    "Номер счета получателя",
+    `${prefix}__label.form__label`
+  );
+  const labelAmount = new FormLabel("Сумма перевода", `${prefix}__label.form__label`);
 
-  const fieldNumber = new CustomInput("text", "login", `${prefix}__input`);
-  const fieldAmount = new CustomInput("text", "password", `${prefix}__input`);
-  const labelNumber = new FormLabel("Номер счета получателя", `${prefix}__label`);
-  const labelAmount = new FormLabel("Сумма перевода", `${prefix}__label`);
+  const btn = new Btn("Войти", "submit", 'form');
 
-  const btn = new Btn("Войти", 'submit', prefix);
   setChildren(form, [
     el(`h2.${prefix}__title`, "Отправить"),
     labelNumber,
@@ -35,4 +35,4 @@ function createTransaction(prefix) {
   return form;
 }
 
-export { createTransaction as default }
+export { createTransaction as default };
