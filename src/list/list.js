@@ -43,7 +43,6 @@ function pageList() {
   mount(page, container);
 
 
-  
   return page;
 }
 

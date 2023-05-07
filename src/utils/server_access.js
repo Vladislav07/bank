@@ -133,7 +133,7 @@ export async function allCurrencies() {
   }
 }
 
-export async function userCurrencies(token) {
+export async function userCurrencies() {
   try {
     console.log("userCurrencies");
     const res = await fetch("http://localhost:3000/currencies", {
