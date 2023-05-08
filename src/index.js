@@ -5,7 +5,8 @@ import pageLogOut from "./logOut/logout";
 import header from "./header/header";
 import list from "./list/list";
 import detailsAccount from "./account/account";
-import pageCurrency from './currency/currency'
+import pageCurrency from './currency/currency';
+import pageMap from './map/map';
 
 const body = document.querySelector("#root");
 
@@ -19,18 +20,18 @@ const render = (content) => {
   beforeRouter();
   mount(body, content);
 };
-// window.sessionId = -1;
 
-// router.hooks({
-//   before: function (done, match) {
-//     if (window.sessionId === -1 && match.url !== "login") {
-//       console.log("redirect to login");
-//       router.navigate("/login");
-//       return;
-//     }
-//     done();
-//   },
-// });
+
+router.hooks({
+  before: function (done, match) {
+    if (sessionStorage.getItem("key") === null && match.url !== "/") {
+      console.log("redirect to login");
+      router.navigate("/");
+      return;
+    }
+    done();
+  },
+});
 
 router
   .on("/", () => {
@@ -52,9 +53,7 @@ router
     render(pageCurrency())
   })
   .on("location", () => {
-    clear();
-    const h2 = el("h2", "location");
-    mount(body, h2);
+    render(pageMap())
   })
   .on("/fff", () => {
     clear();

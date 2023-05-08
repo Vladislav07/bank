@@ -1,0 +1,18 @@
+@import '../mixin';
+@import '../var';
+
+.map {
+
+  &__container {
+    @include container;
+    padding: 25px 50px;
+  }
+
+
+}
+
+
+#map{
+  width: 100px;
+  height: 500px;
+}

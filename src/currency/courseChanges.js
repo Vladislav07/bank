@@ -4,10 +4,10 @@ import {  Container, Section } from "../base/base";
 import up from "../assets/images/Vector_up.svg";
 import bottom from "../assets/images/Vector_bottom.svg";
 
-function courseChanges() {
+function courseChanges(parent) {
   const socket = new WebSocket("ws://localhost:3000/currency-feed");
   const prefix = "rate";
-  const sectionRate = new Section(prefix);
+  const sectionRate = new Section(prefix, parent);
   const container = new Container(prefix);
   const title = el(
     `h2.${prefix}__title`,
@@ -19,17 +19,17 @@ function courseChanges() {
   mount(container, ul);
   mount(sectionRate, container);
 
-  socket.onmessage = function (event) {
-    const record = JSON.parse(event.data);
-    const recordElement = rowRate(record, prefix);
+  // socket.onmessage = function (event) {
+  //   const record = JSON.parse(event.data);
+  //   const recordElement = rowRate(record, prefix);
 
-    mount(ul, recordElement);
-    l += 1;
-    if (l > 11) {
-      const firstEl = document.querySelector("li");
-      unmount(ul, firstEl);
-    }
-  };
+  //   mount(ul, recordElement);
+  //   l += 1;
+  //   if (l > 11) {
+  //     const firstEl = document.querySelector(`.${prefix}__item`);
+  //     unmount(ul, firstEl);
+  //   }
+  // };
 
   return sectionRate;
 }

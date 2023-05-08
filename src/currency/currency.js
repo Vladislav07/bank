@@ -2,6 +2,7 @@ import { el, mount, setChildren } from "redom";
 import "./_currency.scss";
 import pageRate  from './courseChanges';
 import yourCurrency from './yourCurrency';
+import currencyExchange from './currencyExchange'
 import {
   Page,
   Section,
@@ -23,8 +24,10 @@ function pageCurrency() {
   setChildren(container, [
     new SectionTitle("Валютный обмен", prefix),
     new Group(prefix, [
-      yourCurrency(),
-      pageRate(),
+      yourCurrency(prefix),
+      currencyExchange(prefix),
+      pageRate(prefix),
+
     ]),
   ]);
 

@@ -3,9 +3,9 @@ import "./_yourCurrency.scss";
 import { Container, Section } from "../base/base";
 import { userCurrencies } from "../utils/server_access";
 
-function yourCurrency() {
-  const prefix = "yourCurrency";
-  const sectionCurrency = new Section(prefix);
+function balanceCurrency(parent) {
+  const prefix = "balance";
+  const sectionCurrency = new Section(prefix, parent);
   const container = new Container(prefix);
   const title = el(`h2.${prefix}__title`, `Ваши валюты`);
 
@@ -15,25 +15,23 @@ function yourCurrency() {
   mount(container, ul);
   mount(sectionCurrency, container);
   userCurrencies().then((data) => {
-
     for (let key in data) {
-       mount(ul, rowCurrency(data[key], prefix));
-       console.log(data[key])
+      mount(ul, rowCurrency(data[key], prefix));
+      console.log(data[key]);
     }
-
   });
 
   return sectionCurrency;
 }
 
 function rowCurrency(data, prefix) {
-  const record = Object.values(data)
-  const row = el(`li.${prefix}__item`, [
-    el(`span.${prefix}__name`, record.code),
+  const record = Object.values(data);
+  const row = el(`li.${prefix}__i`, [
+    el(`span.${prefix}__name`, data.code),
     el(`span.${prefix}__separator`, ""),
-    el(`span.${prefix}__number`, record.amount),
+    el(`span.${prefix}__number`, data.amount),
   ]);
   return row;
 }
 
-export { yourCurrency as default };
+export { balanceCurrency as default };

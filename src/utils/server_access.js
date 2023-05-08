@@ -24,8 +24,8 @@ export async function authorizationRequest() {
         throw new Error(data.error);
       } else {
         token = data.payload.token;
-        console.log(token);
-        return token;
+        sessionStorage.setItem("key", token);
+        return true;
       }
     }
   } catch (error) {
@@ -40,7 +40,7 @@ export async function listOfUserAccounts() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${token}`,
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
       },
     });
     if (res.ok == true) {
@@ -66,7 +66,7 @@ export async function accountDetails(idAccount) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${token}`,
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
       },
     });
     if (res.ok == true) {
@@ -82,14 +82,14 @@ export async function accountDetails(idAccount) {
   }
 }
 
-export async function createaAccount(token) {
+export async function createaAccount() {
   try {
     console.log("createaAccount");
     const res = await fetch("http://localhost:3000/create-account", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${token}`,
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
       },
     });
     if (res.ok == true) {
@@ -140,7 +140,7 @@ export async function userCurrencies() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${token}`,
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
       },
     });
     if (res.ok == true) {
@@ -170,7 +170,7 @@ export async function currencyBuy(token, exchange) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${token}`,
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
       },
       body: JSON.stringify(exchange),
     });

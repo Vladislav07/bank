@@ -35,6 +35,7 @@
   "dependencies": {
     "@types/google.visualization": "0.0.69",
     "google-charts": "^2.0.0",
+    "google-maps": "^4.3.3",
     "imask": "^6.6.0",
     "navigo": "^8.11.1",
     "redom": "^3.29.1"

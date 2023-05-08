@@ -13,10 +13,16 @@ export class Container {
 }
 
 export class Section {
-  constructor(section) {
-    this.el = el(`section.${section}`, {
-      id: section,
-    });
+  constructor(section, parent) {
+    if (parent) {
+      this.el = el(`section.${section}.${parent}__${section}`, {
+        id: section,
+      });
+    } else {
+      this.el = el(`section.${section}`, {
+        id: section,
+      });
+    }
   }
 }
 
@@ -95,7 +101,6 @@ export class RowTable {
       el(`td.${className}__value`, element.to),
       el(`td.${className}__value`, element.amount),
       el(`td.${className}__value`, element.date),
-    ]
-    );
+    ]);
   }
 }

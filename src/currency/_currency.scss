@@ -1,7 +1,8 @@
-@import '../mixin';
-@import '../var';
+@import "../mixin";
+@import "../var";
 
 .currency {
+
   &__container {
     @include container;
     padding: 50px;
@@ -9,5 +10,29 @@
 
   &__title {
     @include title;
+    margin-bottom: 56px;
+  }
+
+  &__group {
+    display: grid;
+    grid-template-columns: 588px 703px;
+    grid-template-rows: max-content 273px;
+    row-gap: 44px;
+    column-gap: 50px;
+  }
+
+  &__balance {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  &__rate {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  &__form {
+    grid-column: 1;
+    grid-row: 2;
   }
 }
