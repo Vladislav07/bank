@@ -163,7 +163,7 @@ export async function userCurrencies() {
 // 	amount // сумма, которая списывается, конвертация вычисляется сервером автоматически, исходя из текущего валютного курса для данной валютной пары
 // }
 
-export async function currencyBuy(token, exchange) {
+export async function currencyBuy( exchange) {
   try {
     console.log("currency-buy");
     const res = await fetch("http://localhost:3000/currency-buy", {
@@ -180,6 +180,29 @@ export async function currencyBuy(token, exchange) {
         throw new Error(data.error);
       } else {
         console.log(data.payload);
+        return data.payload;
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export async function getGeoLocation() {
+  try {
+    console.log("accountDetails");
+    const res = await fetch('http://localhost:3000/banks', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${sessionStorage.getItem("key")}`,
+      },
+    });
+    if (res.ok == true) {
+      const data = await res.json();
+      if (data.error) {
+        throw new Error(data.error);
+      } else {
         return data.payload;
       }
     }

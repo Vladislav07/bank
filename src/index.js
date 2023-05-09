@@ -22,20 +22,23 @@ const render = (content) => {
 };
 
 
-router.hooks({
-  before: function (done, match) {
-    if (sessionStorage.getItem("key") === null && match.url !== "/") {
-      console.log("redirect to login");
-      router.navigate("/");
-      return;
-    }
-    done();
-  },
-});
+// router.hooks({
+//   before: function (done, match) {
+
+//     if (sessionStorage.getItem("key") === null && match.url !== "/") {
+//       console.log("redirect to login");
+//       router.navigate("/");
+//       return;
+//     }
+//     done();
+//   },
+// });
 
 router
   .on("/", () => {
-    render(pageLogOut());
+    clear();
+    beforeRouter();
+    mount(body, pageLogOut());
   })
   .on("/list", () => {
     render(list());

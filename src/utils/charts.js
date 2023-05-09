@@ -1,24 +1,22 @@
-// import { GoogleCharts} from './googleCharts.esm';
+import { GoogleCharts } from "./googleCharts.esm";
 
-// //Load the charts library with a callback
+//Load the charts library with a callback
 
-// GoogleCharts.load(drawChart);
+    GoogleCharts.load(drawChart);
 
-// function drawChart(tag) {
-
-//   const data = GoogleCharts.api.visualization.arrayToDataTable([
-//     ["Chart thing", "Chart amount"],
-//     ["Lorem ipsum", 60],
-//     ["Dolor sit", 22],
-//     ["Sit amet", 18],
-//   ]);
-//   const pie_1_chart = new GoogleCharts.api.visualization.PieChart(
-//     document.getElementById(tag)
-//   );
-//   pie_1_chart.draw(data);
-// }
-
-// export { drawChart as default };
+    function drawChart(monthlyBalance) {
+      const monthlySummary = [];
+      monthlyBalance.forEach((element) => {
+        let temp = [element.mongtn, element.balance];
+        monthlySummary.push(temp);
+      });
+      const data =
+        GoogleCharts.api.visualization.arrayToDataTable(monthlySummary);
+      const chart = new GoogleCharts.api.visualization.ColumnChart(
+        document.getElementById("chart")
+      );
+      chart.draw(data);
+    }
 
 
-
+export { drawChart as default };
