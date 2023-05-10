@@ -56,8 +56,8 @@ function getBalance(number) {
     ]);
 
     setTimeout(() => {
-      drawChart(balanceUser).then((data)=>{
-      })
+      drawChart(balanceUser, tag)
+      
     }, 1500);
   });
 

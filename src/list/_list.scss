@@ -10,7 +10,8 @@
   &__group {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    margin-bottom: 50px;
   }
 
   &__title {
@@ -25,5 +26,12 @@
     @include btn;
     background-color: $brand-primary;
     color: #fff;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    row-gap: 50px;
+    column-gap: 70px;
   }
 }

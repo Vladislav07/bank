@@ -6,22 +6,23 @@ import currency from "currency.js";
 GoogleCharts.load(drawChart);
 
 
-function drawChart(balanceUser) {
+function drawChart(balanceUser, tag) {
   const monthlySummary = [];
+  if (balanceUser) {
+    const count = balanceUser.length
+    for (let index = 0; index < count; index++) {
+      const element = balanceUser[index];
+      let temp = [element.mongtn, element.balance];
+      monthlySummary.push(temp);
+    }
 
-  for (let index = 0; index < balanceUser.length; index++) {
-    const element = balanceUser[index];
-    let temp = [element.mongtn, element.balance];
-    monthlySummary.push(temp);
+    const data = dataChart(monthlySummary);
+    const chart = new GoogleCharts.api.visualization.ColumnChart(
+     tag //document.getElementById("chart")
+    );
+    chart.draw(data);
   }
-
-  const data = dataChart();
-  const chart = new GoogleCharts.api.visualization.ColumnChart(
-    document.getElementById("chart")
-  );
-  chart.draw(data);
 }
-
 export { drawChart as default };
 
 
@@ -51,7 +52,7 @@ export function SortDataTransaction(transaction, amount, account) {
       };
 
       dataChart.push(temp);
-    // currentBalance = tempBalance;
+      // currentBalance = tempBalance;
       outgo = 0;
       receipt = 0;
       mongthLastTrans = getMongth(trans.date);
@@ -75,15 +76,11 @@ function isOut(transaction, account) {
 
 
 
-function dataChart() {
-  const monthlySummary = [];
+function dataChart(monthlySummary) {
   var data = new google.visualization.DataTable();
   data.addColumn("string", "Mongth");
   data.addColumn("number", "Balance");
-  balanceUser.forEach((element) => {
-    let temp = [element.mongtn, element.balance];
-    monthlySummary.push(temp);
-  });
+ 
   data.addRows(monthlySummary);
   return data;
 }
@@ -91,44 +88,44 @@ function dataChart() {
 
 
 function getMonth(number) {
- switch (number) {
-  case 1:
-   return "Январь"
-    break;
+  switch (number) {
+    case 1:
+      return "Январь"
+      break;
     case 2:
-   return"февраль"
-    break;
+      return "февраль"
+      break;
     case 3:
-   return "Март"
-    break;
+      return "Март"
+      break;
     case 4:
-   return "Апрель"
-    break;
+      return "Апрель"
+      break;
     case 5:
-   return "Май"
-    break;
+      return "Май"
+      break;
     case 6:
-   return "июнь"
-    break;
+      return "июнь"
+      break;
     case 7:
-   return "июль"
-     break;
+      return "июль"
+      break;
     case 8:
-   return "август"
-    break;
+      return "август"
+      break;
     case 9:
-   return "сентябрь"
-    break;
+      return "сентябрь"
+      break;
     case 10:
-   return "октябрь"
-    break;
+      return "октябрь"
+      break;
     case 11:
-   return "ноябрь"
-    break;
+      return "ноябрь"
+      break;
     case 12:
-   return "декабрь"
-    break;
-  default:
-    break;
- }
+      return "декабрь"
+      break;
+    default:
+      break;
+  }
 }
