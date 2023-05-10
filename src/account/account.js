@@ -5,6 +5,7 @@ import createTransaction from "./createTransaction";
 import { accountDetails } from "../utils/server_access";
 //import drawChart from "../utils/charts";
 import { GoogleCharts } from "../utils/googleCharts.esm";
+import router from '../index';
 
 import {
   Page,
@@ -18,10 +19,14 @@ import {
   Btn,
   Link,
 } from "../base/base";
+
+
 import currency from "currency.js";
 
 GoogleCharts.load(drawChart);
 let balanceUser = null;
+
+
 function detailsAccount(number) {
   const prefix = "account";
   const accountPage = new Page(prefix);
@@ -48,11 +53,17 @@ function detailsAccount(number) {
       ]),
       createTransaction(prefix),
       tag,
-      history(data.transactions),
+      history(data.transactions, prefix),
     ]);
     setTimeout(() => {
       console.log(balanceUser);
       drawChart();
+      const chart = document.getElementById('chart');
+      chart.addEventListener('click', (e)=>{
+        e.preventDefault();
+        router.navigate(`balance/${number}`)
+      })
+
     }, 1500);
   });
 

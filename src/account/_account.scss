@@ -5,9 +5,15 @@
   &__container {
     @include container;
     padding: 50px;
+    display: grid;
+    grid-template-rows: max-content max-content max-content;
+    grid-template-columns: 606px 684px;
+    gap: 50px;
   }
 
   &__group {
+    grid-row: 1;
+    grid-column: 1 / span 2;
     display: grid;
     grid-template-rows: max-content max-content;
     grid-template-columns: 1fr 1fr;
@@ -46,4 +52,20 @@
     font-weight: 400;
     color: #000;
   }
+
+  &__form {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  &__chart {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  &__history{
+    grid-row: 3;
+    grid-column: 1 / span 2;
+  }
+
 }

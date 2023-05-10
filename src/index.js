@@ -7,6 +7,7 @@ import list from "./list/list";
 import detailsAccount from "./account/account";
 import pageCurrency from './currency/currency';
 import pageMap from './map/map';
+import getBalance from './balance/balance'
 
 const body = document.querySelector("#root");
 
@@ -44,18 +45,15 @@ router
     render(list());
   })
   .on("/account/:id", ({ data: { id } }) => {
-    console.log(id);
     render(detailsAccount(id));
   })
-  .on("balance", () => {
-    clear();
-    const h2 = el("h2", "balance");
-    mount(body, h2);
+  .on("/balance/:id", ({ data: { id } }) => {
+    render(getBalance(id));
   })
   .on("/currency", () => {
     render(pageCurrency())
   })
-  .on("location", () => {
+  .on("/location", () => {
     render(pageMap())
   })
   .on("/fff", () => {
