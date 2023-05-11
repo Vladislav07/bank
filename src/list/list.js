@@ -20,6 +20,12 @@ function pageList() {
   const page = new Page(prefix);
   const container = new Container(prefix);
   const wrapper = el(`.${prefix}__wrapper`);
+  const styleChoises = el('link', {
+    rel:"stylesheet",
+    href:"https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
+  })
+  const head = document.querySelector('head');
+  mount(head, styleChoises)
   setChildren(container, [
     new Group(prefix, [
       new SectionTitle("Ваши счета", prefix),
@@ -48,8 +54,8 @@ function pageList() {
 
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.querySelector('.register__btn');
-   
-    SetSelect() 
+
+    SetSelect()
     btn.addEventListener('click', () => {
       createaAccount();
       renderCardsAccount()
@@ -61,6 +67,11 @@ function pageList() {
 }
 
 export { pageList as default };
+
+{/* <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+/> */}
 
 function SetSelect() {
 const el = document.getElementById('accounts')
