@@ -12,10 +12,16 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
+
+    .choices{
+      justify-items: flex-start;
+      margin-right: auto;
+    }
   }
 
   &__title {
     @include title;
+    margin-right: 35px;
   }
 
   &__select{
