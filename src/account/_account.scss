@@ -15,6 +15,7 @@
     grid-row: 1;
     grid-column: 1 / span 2;
     display: grid;
+    row-gap: 30px;
     grid-template-rows: max-content max-content;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
@@ -46,11 +47,21 @@
     color: #fff;
   }
 
+
+
   &__balance {
+    grid-row: 2;
+    grid-column: 2;
+    justify-self: flex-end;
     font-size: 20px;
     line-height: 23px;
     font-weight: 400;
     color: #000;
+  }
+
+  &__label {
+    font-weight: 700;
+    margin-right: 50px;
   }
 
   &__form {
@@ -58,9 +69,13 @@
     grid-column: 1;
   }
 
-  &__chart {
+  &__charts  {
     grid-row: 2;
     grid-column: 2;
+    cursor: pointer;
+  }
+  &__chart {
+  height: 100%;
   }
 
   &__history{
