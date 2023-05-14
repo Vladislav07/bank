@@ -3,7 +3,6 @@ import "./_balance.scss";
 import { accountDetails } from "../utils/server_access";
 import { drawChart } from "../utils/charts";
 import { SortDataTransaction } from "../utils/charts";
-import { GoogleCharts } from "../utils/googleCharts.esm";
 import history from "../history/history";
 
 import {
@@ -20,8 +19,6 @@ import {
   TitleSection,
 } from "../base/base";
 
-GoogleCharts.load(drawChart);
-let balanceUser = null;
 
 function getBalance(number) {
   const prefix = "balance";
@@ -41,9 +38,9 @@ function getBalance(number) {
     id: "chart-detail",
   });
 
-  // const count = balanceUser.length;
   setChildren(sectionChartHistory, [titleChartHistory, tagHistory]);
   setChildren(sectionChartDetail, [titleChartDetail, tagDetail]);
+  mount(getBalance, container);
 
   accountDetails(number)
     .then((data) => {
@@ -65,14 +62,14 @@ function getBalance(number) {
     })
     .then((balanceUser) => {
       setTimeout(() => {
+
+
         drawChart(balanceUser, tagHistory);
         drawChart(balanceUser, tagDetail);
-      }, 500);
+      }, 1500);
+      
     });
-
-  mount(getBalance, container);
-
-  return getBalance;
+    return getBalance;
 }
 
 export { getBalance as default };

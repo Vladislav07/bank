@@ -23,17 +23,17 @@ const render = (content) => {
 };
 
 
-// router.hooks({
-//   before: function (done, match) {
+router.hooks({
+  before: function (done, match) {
 
-//     if (sessionStorage.getItem("key") === null && match.url !== "/") {
-//       console.log("redirect to login");
-//       router.navigate("/");
-//       return;
-//     }
-//     done();
-//   },
-// });
+    if (sessionStorage.getItem("key") === null && match.url !== "/") {
+      console.log("redirect to login");
+      router.navigate("/");
+     // return;
+    }
+    done();
+  },
+});
 
 router
   .on("/", () => {
@@ -56,7 +56,7 @@ router
   .on("/location", () => {
     render(pageMap())
   })
-  .on("/fff", () => {
+  .on("/kkk", () => {
     clear();
     const h2 = el("a", { href: "list", "data-navigo": true }, "kkk");
     mount(body, h2);

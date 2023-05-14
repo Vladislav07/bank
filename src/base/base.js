@@ -64,9 +64,9 @@ export class Select {
 }
 
 export class Btn {
-  constructor(text, type, className) {
+  constructor(text, type, className, classNameExtra) {
     this.el = el(
-      `button.${className}__btn`,
+     classNameExtra? `button.${className}__btn.${classNameExtra}`:`button.${className}__btn`,
       {
         type: type,
       },

@@ -87,16 +87,11 @@ function GetDataWithAccumulation(balanceUser) {
   return monthlySummary;
 }
 
-export function SortDataTransaction(transaction, amount, account) {
-  const trans = transaction.map((record) => {
-    return {
-      from: record.from,
-      to: record.to,
-      date: new Date(record.date),
-    };
-  });
+export function SortDataTransaction(trans, amount, account) {
+  const transaction = trans
 
   let currentBalance = amount;
+
   let mongthLastTrans = new Date(transaction[0].date).getMonth();
   const dataChart = [];
   let outgo = 0;
