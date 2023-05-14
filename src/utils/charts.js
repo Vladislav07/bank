@@ -20,28 +20,41 @@ const optionsHistory = {
   legend: "none",
 };
 
+const optionsDetail = {
+  width: 1240,
+  backgroundColor: {
+    strokeWidth: 1,
+  },
+  legend: "none",
+  bar: { groupWidth: "75%" },
+  isStacked: true,
+};
+
 export function drawChart(balanceUser, tag) {
-  const chart = new GoogleCharts.api.visualization.ColumnChart(tag);
+
   let options = null;
+   const chart = new GoogleCharts.api.visualization.ColumnChart(tag);
   switch (tag.id) {
     case "chart":
       options = optionsSimple;
+      chart.draw(dataChart(GetData(balanceUser)), options);
       break;
 
     case "chart-history":
       options = optionsHistory;
+
+      chart.draw(dataChart(GetData(balanceUser)), options);
       break;
     case "chart-detail":
-      options = optionsHistory;
-      chart.draw(dataChart(GetDataWithAccumulation(balanceUser)), options);
+      options = optionsDetail;
+
+      chart.draw( WithAccum(GetDataWithAccumulation(balanceUser)), options);
       break;
 
     default:
       console.log("not chart");
       break;
   }
-
-  chart.draw(dataChart(GetData(balanceUser)), options);
 }
 
 function GetData(balanceUser) {
@@ -66,7 +79,7 @@ function GetDataWithAccumulation(balanceUser) {
     const count = balanceUser.length;
     for (let index = 0; index < count; index++) {
       const element = balanceUser[index];
-      let temp = [element.mongtn, element.In, element.out];
+      let temp = [element.mongtn, element.in, element.out];
       monthlySummary.push(temp);
     }
   }
@@ -101,7 +114,7 @@ export function SortDataTransaction(transaction, amount, account) {
         .subtract(outgo).value;
 
       const temp = {
-        mongtn: months[mongthLastTrans],
+        mongtn: months[mongthLastTrans-1],
         out: outgo,
         in: receipt,
         balance: currentBalance,
@@ -132,12 +145,11 @@ function dataChart(monthlySummary) {
   return data;
 }
 
-function WithAccum(monthlySummary) {
-  var data = google.visualizationDataTable();
-  data.addColumn("string", "Mongth");
-  data.addColumn("number", "Balance");
-
-  data.addRows(monthlySummary);
+function WithAccum(Summary) {
+  var data = google.visualization.arrayToDataTable([
+    ['Genre', 'Fantasy & Sci Fi', 'Romance'  ],
+     ...Summary
+  ]);
   return data;
 }
 
@@ -155,3 +167,6 @@ const months = [
   "ноябрь",
   "декабрь",
 ];
+
+
+
