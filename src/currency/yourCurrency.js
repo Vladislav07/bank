@@ -4,7 +4,7 @@ import { Container, Section } from "../base/base";
 import { userCurrencies } from "../utils/server_access";
 
 function balanceCurrency(parent) {
-  const prefix = "balance";
+  const prefix = "cumulation";
   const sectionCurrency = new Section(prefix, parent);
   const container = new Container(prefix);
   const title = el(`h2.${prefix}__title`, `Ваши валюты`);

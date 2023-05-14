@@ -1,9 +1,10 @@
 import { el, mount, setChildren } from "redom";
 import history from "../history/history";
 import "./_account.scss";
+import "../utils/_chart.scss"
 import createTransaction from "./createTransaction";
 import { accountDetails } from "../utils/server_access";
-import drawChart from "../utils/charts";
+import {drawChart} from "../utils/charts";
 import { SortDataTransaction } from "../utils/charts";
 import { GoogleCharts } from "../utils/googleCharts.esm";
 import router from "../index";
@@ -19,6 +20,7 @@ import {
   Select,
   Btn,
   Link,
+  TitleSection,
 } from "../base/base";
 
 GoogleCharts.load(drawChart);
@@ -28,8 +30,9 @@ function detailsAccount(number) {
   const prefix = "account";
   const accountPage = new Page(prefix);
   const container = new Container(prefix);
-  const sectionChart = new Section(`${prefix}__chart`);
-  const tag = el(`.${prefix}__chart`, {
+  const sectionChart = new Section("chart", prefix);
+  const titleChart = new TitleSection("Динамика баланса", "chart");
+  const tag = el(`.chart__balance`, {
     id: "chart",
   });
 
@@ -42,13 +45,13 @@ function detailsAccount(number) {
     );
 
     const count = balanceUser.length;
-    mount(sectionChart, tag);
+    setChildren(sectionChart, [titleChart, tag]);
     setChildren(container, [
       new Group(prefix, [
         new SectionTitle("Просмотр счета", prefix),
         new Link("/list", "Вернуться назад", prefix),
         el(`h3.${prefix}__number`, number),
-        el(`.${prefix}__balance`, [
+        el(`.${prefix}__residue`, [
           el(`span.${prefix}__label`, `Баланс`),
           el(`span.${prefix}__amount`, `${data.balance} руб.`),
         ]),
@@ -59,17 +62,18 @@ function detailsAccount(number) {
     ]);
     setTimeout(() => {
       drawChart(balanceUser.slice(count - 6, count), tag);
+      tag.addEventListener('click', (e)=>{
+         e.preventDefault();
+        router.navigate(`/balance/${number}`);
+      })
     }, 300);
   });
   mount(accountPage, container);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    sectionChart.addEventListener("click", (e) => {
-      e.preventDefault();
-      router.navigate(`/balance/${number}`);
-    });
-  });
+
   return accountPage;
 }
 
 export { detailsAccount as default };
+
+

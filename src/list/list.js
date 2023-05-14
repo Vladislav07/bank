@@ -22,18 +22,18 @@ function pageList() {
   const page = new Page(prefix);
   const container = new Container(prefix);
   const wrapper = el(`.${prefix}__wrapper`);
-  const styleChoises = el('link', {
+  const styleChoises = el("link", {
     rel: "stylesheet",
     href: "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
-  })
-  const linkMainCCS = document.querySelector('link');
-  linkMainCCS.before(styleChoises)
+  });
+  const linkMainCCS = document.querySelector("link");
+  linkMainCCS.before(styleChoises);
   setChildren(container, [
     new Group(prefix, [
       new SectionTitle("Ваши счета", prefix),
       new Select("accounts", prefix),
-      new Btn("+ Создать новый счет", "button", prefix)
-    ])
+      new Btn("+ Создать новый счет", "button", prefix),
+    ]),
   ]);
   function renderCardsAccount() {
     listOfUserAccounts().then((data) => {
@@ -43,37 +43,36 @@ function pageList() {
   }
 
   function renderCards(data) {
-     data.forEach((card) => {
-        mount(
-          wrapper,
-          getCard(
-            prefix,
-            card.account,
-            card.balance,
-            card.transactions.length > 0 ? card.transactions[0].date : ""
-          )
-        );
-      });
+    data.forEach((card) => {
+      mount(
+        wrapper,
+        getCard(
+          prefix,
+          card.account,
+          card.balance,
+          card.transactions.length > 0 ? card.transactions[0].date : ""
+        )
+      );
+    });
   }
 
-  renderCardsAccount()
+  renderCardsAccount();
   mount(container, wrapper);
   mount(page, container);
 
   document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.querySelector('.register__btn');
+    const btn = document.querySelector(".register__btn");
 
     SetSelect();
-
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       createaAccount();
-      renderCardsAccount()
-
-    })
+      renderCardsAccount();
+    });
+   
   });
 
   function SetSelect() {
-    const el = document.getElementById('accounts')
+    const el = document.getElementById("accounts");
     const select = new Choices(el, {
       silent: false,
       items: [],
@@ -87,14 +86,14 @@ function pageList() {
       editItems: false,
       allowHTML: false,
       duplicateItemsAllowed: true,
-      delimiter: ',',
+      delimiter: ",",
       paste: false,
       searchEnabled: false,
       searchChoices: true,
       searchFloor: 1,
       searchResultLimit: 3,
-      searchFields: ['label', 'value'],
-      position: 'auto',
+      searchFields: ["label", "value"],
+      position: "auto",
       resetScrollPosition: true,
       shouldSort: true,
       shouldSortItems: false,
@@ -103,24 +102,26 @@ function pageList() {
       searchPlaceholderValue: null,
       prependValue: null,
       appendValue: null,
-      renderSelectedChoices: 'auto',
-      itemSelectText: '',
+      renderSelectedChoices: "auto",
+      itemSelectText: "",
     });
 
-
     select.setValue([
-      { value: 'account', label: 'По номеру' },
-      { value: 'balance', label: 'По балансу' },
-      { value: 'transaction.date', label: 'По последней транзакции' },
-      { value: 'placeholder', label: 'Сортировка', selected: false, disabled: false },
+      { value: "account", label: "По номеру" },
+      { value: "balance", label: "По балансу" },
+      { value: "transaction.date", label: "По последней транзакции" },
+      {
+        value: "placeholder",
+        label: "Сортировка",
+        selected: false,
+        disabled: false,
+      },
     ]);
 
-    select.passedElement.element.addEventListener('change', (value) => {
-    
-      arrAccount=Sorting(arrAccount, value.detail.value)
-        console.log(arrAccount)
-    })
-
+    select.passedElement.element.addEventListener("change", (value) => {
+      arrAccount = Sorting(arrAccount, value.detail.value);
+      console.log(arrAccount);
+    });
   }
 
   function Sorting(arr, prop, dir = false) {
