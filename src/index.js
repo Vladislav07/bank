@@ -8,6 +8,7 @@ import detailsAccount from "./account/account";
 import pageCurrency from './currency/currency';
 import pageMap from './map/map';
 import getBalance from './balance/balance'
+import {ListAccountsController} from './controller'
 
 const body = document.querySelector("#root");
 
@@ -43,7 +44,7 @@ router
     mount(body, pageLogOut());
   })
   .on("/list", () => {
-    render(list());
+    ListAccountsController();
   })
   .on("/account/:id", ({ data: { id } }) => {
     render(detailsAccount(id));
