@@ -19,17 +19,17 @@ function courseChanges(parent) {
   mount(container, ul);
   mount(sectionRate, container);
 
-  // socket.onmessage = function (event) {
-  //   const record = JSON.parse(event.data);
-  //   const recordElement = rowRate(record, prefix);
+  socket.onmessage = function (event) {
+    const record = JSON.parse(event.data);
+    const recordElement = rowRate(record, prefix);
 
-  //   mount(ul, recordElement);
-  //   l += 1;
-  //   if (l > 11) {
-  //     const firstEl = document.querySelector(`.${prefix}__item`);
-  //     unmount(ul, firstEl);
-  //   }
-  // };
+    mount(ul, recordElement);
+    l += 1;
+    if (l > 11) {
+      const firstEl = document.querySelector(`.${prefix}__item`);
+      unmount(ul, firstEl);
+    }
+  };
 
   return sectionRate;
 }

@@ -9,7 +9,7 @@ function getHistory(transactions, parent) {
   const section = new Section(prefix, parent)
   const container = new Container(prefix)
   mount(container, new TitleSection('История переводов'))
-  mount(container,getTable(transactions,prefix))
+  mount(container,getTable(transactions, prefix))
   mount(section, container)
   return section;
 }

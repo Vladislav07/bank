@@ -11,8 +11,8 @@ import getBalance from './balance/balance'
 
 const body = document.querySelector("#root");
 
-function beforeRouter() {
-  mount(body, header());
+function beforeRouter(isView = true) {
+  mount(body, header(isView));
 }
 
 const router = new Navigo("/", { hash: true });
@@ -38,7 +38,8 @@ router.hooks({
 router
   .on("/", () => {
     clear();
-    beforeRouter();
+    sessionStorage.removeItem("key");
+    beforeRouter(false);
     mount(body, pageLogOut());
   })
   .on("/list", () => {

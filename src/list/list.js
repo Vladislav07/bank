@@ -28,10 +28,12 @@ function pageList() {
   });
   const linkMainCCS = document.querySelector("link");
   linkMainCCS.before(styleChoises);
+
+
   setChildren(container, [
     new Group(prefix, [
       new SectionTitle("Ваши счета", prefix),
-      new Select("accounts", prefix),
+     new Select("accounts", prefix),
       new Btn("+ Создать новый счет", "button", prefix),
     ]),
   ]);
@@ -63,17 +65,17 @@ function pageList() {
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.querySelector(".register__btn");
 
-    SetSelect();
+   SetSelect();
     btn.addEventListener("click", () => {
       createaAccount();
       renderCardsAccount();
     });
-   
+
   });
 
   function SetSelect() {
-    const el = document.getElementById("accounts");
-    const select = new Choices(el, {
+    const elem = document.getElementById("accounts");
+    const select = new Choices(elem, {
       silent: false,
       items: [],
       choices: [],
