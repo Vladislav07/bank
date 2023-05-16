@@ -1,15 +1,13 @@
 import { el, mount, setChildren } from "redom";
-import router from './index';
 import Choices from "choices.js";
-import "./_base.scss";
-import pageLogOut from "./logOut/logout";
-import header from "./header/header";
-import {ListPage} from "./list/list";
-import detailsAccount from "./account/account";
-import pageCurrency from './currency/currency';
-import pageMap from './map/map';
-import getBalance from './balance/balance'
-import { listOfUserAccounts, createaAccount } from "./utils/server_access";
+import "../_base.scss";
+import header from "../header/header";
+import {ListPage} from "./list";
+import detailsAccount from "../account/account";
+import pageCurrency from '../currency/currency';
+import pageMap from '../map/map';
+import getBalance from '../balance/balance'
+import { listOfUserAccounts, createaAccount } from "../utils/server_access";
 
 const body = document.querySelector("#root");
 

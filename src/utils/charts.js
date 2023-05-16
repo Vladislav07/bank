@@ -88,8 +88,8 @@ function GetDataWithAccumulation(balanceUser) {
 }
 
 export function SortDataTransaction(trans, amount, account) {
-  const transaction = trans
-
+  const transaction = trans.reverse()
+  console.log(transaction)
   let currentBalance = amount;
 
   let mongthLastTrans = new Date(transaction[0].date).getMonth();

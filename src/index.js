@@ -8,7 +8,8 @@ import detailsAccount from "./account/account";
 import pageCurrency from './currency/currency';
 import pageMap from './map/map';
 import getBalance from './balance/balance'
-import {ListAccountsController} from './controller'
+import {ListAccountsController} from './list/controller'
+import AccountController from './account/accountController'
 
 const body = document.querySelector("#root");
 
@@ -30,7 +31,6 @@ router.hooks({
     if (sessionStorage.getItem("key") === null && match.url !== "/") {
       console.log("redirect to login");
       router.navigate("/");
-     // return;
     }
     done();
   },
@@ -47,7 +47,7 @@ router
     ListAccountsController();
   })
   .on("/account/:id", ({ data: { id } }) => {
-    render(detailsAccount(id));
+    AccountController(id);
   })
   .on("/balance/:id", ({ data: { id } }) => {
     render(getBalance(id));
