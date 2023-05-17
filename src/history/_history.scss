@@ -1,17 +1,17 @@
 @import '../mixin';
 @import '../var';
 
-.history {
+// .history {
 
-  &__container {
-    @include container;
-    padding: 50px;
-    border-radius: 56px;
-    background-color: #F3F4F6;
-  }
+//   &__container {
+//     @include container;
+//     padding: 50px;
+//     border-radius: 56px;
+//     background-color: #F3F4F6;
+//   }
 
 
-  &__title {
-    @include titleSection;
-  }
-}
+//   &__title {
+//     @include titleSection;
+//   }
+// }

@@ -40,6 +40,7 @@
     "google-maps": "^4.3.3",
     "imask": "^6.6.0",
     "navigo": "^8.11.1",
-    "redom": "^3.29.1"
+    "redom": "^3.29.1",
+    "tabulator-tables": "^5.4.4"
   }
 }

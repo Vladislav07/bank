@@ -8,6 +8,8 @@ import { drawChart } from "../utils/charts";
 import { SortDataTransaction } from "../utils/charts";
 import { GoogleCharts } from "../utils/googleCharts.esm";
 import router from "../index";
+import tabulator from "../table/tabulator";
+
 
 import {
   Page,
@@ -52,14 +54,17 @@ export default class AccountPage {
       this.sectionChart,
       history(transactions, this.prefix),
     ]);
+       
      setTimeout(() => {
-
+      console.log(transactions.slice(1,5))
+   const tag = document.querySelector('.prefix__container')
+      tabulator(transactions.slice(1,5), tag)
        drawChart(balanceUser, this.tag);
     //   tag.addEventListener('click', (e) => {
     //     e.preventDefault();
     //     router.navigate(`/balance/${number}`);
     //   })
-     }, 1300);
+     }, 3000);
     mount(this.accountPage, this.container);
     mount(this.body, this.container);
   }
