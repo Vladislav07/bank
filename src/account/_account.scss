@@ -1,6 +1,7 @@
 @import '../mixin';
 @import '../var';
 
+
 .account {
   &__container {
     @include container;
@@ -76,10 +77,11 @@
   }
 
 
-  // &__history{
-  //   grid-row: 3;
-  //   grid-column: 1 / span 2;
-  // }
+  &__history{
+    grid-row: 3;
+    grid-column: 1 / span 2;
+    padding: 50px;
+  }
 
 }
 

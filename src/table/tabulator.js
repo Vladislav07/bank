@@ -1,14 +1,15 @@
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
+import './_tabulator.scss'
 
 export default function tabulator(tabledata, tag) {
   var table = new Tabulator(tag, {
     layout : "fitDataFill",
  // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-    data: t, //assign data to table
+    data: tabledata, //assign data to table
     autoColumns:true,
-    layout: "fitColumns", //fit columns to width of table (optional)
+    layout : "fitDataStretch" , //fit columns to width of table (optional)
     columns: [ //Define Table Columns
-      { title: "Счёт отправителя", field: "from" },
+      { title:"from" , field:"Счёт отправителя" , width:250 },
       { title: "Счёт получателя", field: "to" },
       { title: "Сумма", field: "amount" },
       { title: "Дата", field: "date" },
