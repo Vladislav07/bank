@@ -1,12 +1,16 @@
 @import "../mixin";
 @import "../var";
 
+
+
+
 .tabulator{
   border:transparent;
   background-color: transparent;
 }
 
 .tabulator .tabulator-header{
+
   padding: 20px 50px;
   background-color: #116ACC;
   border-radius: 15px;
@@ -14,9 +18,81 @@
   line-height: 24px;
   color: #fff;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .tabulator .tabulator-header .tabulator-col{
   background-color: transparent;
-  
+
 }
+
+.tabulator .tabulator-tableholder .tabulator-table
+{
+background-color: #F3F4F6;
+}
+
+
+.tabulator-cell .column{
+  height: 50px;
+}
+
+.tabulator .tabulator-table {
+  width: 100%;
+
+}
+
+.tabulator
+.tabulator-row-even,
+.tabulator
+.tabulator-row-odd
+{
+  background-color: #F3F4F6;
+  height: 50px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000;
+  border-bottom: 2px solid rgba(0, 82, 255, 0.1);
+
+}
+
+.tabulator .tabulator-header .tabulator-col{
+  border-right:none;
+
+}
+
+.tabulator .tabulator-col-content .tabulator-col{
+  border-right:none;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-sorter{
+  display: none;
+}
+
+.tabulator-row .tabulator-cell:not(:last-child){
+  margin-right: 100px;
+}
+
+
+.tabulator .tabulator-header .tabulator-col:not(:last-child){
+  margin-right: 100px;
+}
+
+.tabulator-row .tabulator-cell{
+  border: none;
+  padding-left: 50px;
+
+}
+
+
+.tabulator
+.tabulator-row:not(:last-child)
+{
+  margin-bottom: 20px;
+}
+
+
+.tabulator .tabulator-tableholder{
+  height: 100%;
+}
+

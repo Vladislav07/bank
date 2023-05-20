@@ -47,6 +47,8 @@ router
     ListAccountsController();
   })
   .on("/account/:id", ({ data: { id } }) => {
+    clear();
+    beforeRouter();
     AccountController(id);
   })
   .on("/balance/:id", ({ data: { id } }) => {

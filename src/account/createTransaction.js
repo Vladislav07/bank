@@ -5,7 +5,7 @@ import "./_account.scss";
 //import {} from '../utils/server_access';
 import { CustomInput, FormLabel, Btn } from "../base/base";
 
-function createTransaction(prefix) {
+function createTransaction(body, prefix) {
   const form = el(`form.${prefix}__form.form`, {
     id: `form-${prefix}`,
   });
@@ -32,7 +32,8 @@ function createTransaction(prefix) {
     fieldAmount,
     btn,
   ]);
-  return form;
+  //return form;
+  mount(body, form)
 }
 
 export { createTransaction as default };

@@ -12,7 +12,7 @@ const body = document.querySelector("#root");
 
 
 export default function AccountController(number) {
-  //clear();
+ // clear();
   // beforeRouter();
   const page = new AccountPage(body);
   accountDetails(number).then((data) => {
@@ -92,7 +92,7 @@ function TransformationTrans(trans) {
   const transaction = [];
   trans.forEach(record => {
     const temp = new Date(record.date)
-    const d = temp.getDate() + "." + temp.getMonth() + "." + (temp.getYear() + 1900) 
+    const d = temp.getDate() + "." + temp.getMonth() + "." + (temp.getYear() + 1900)
     transaction.push({
       from: record.from,
       to: record.to,

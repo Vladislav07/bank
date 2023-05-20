@@ -1,6 +1,7 @@
 import { GoogleCharts } from "./googleCharts.esm";
 
 import currency from "currency.js";
+import { mount } from 'redom';
 
 GoogleCharts.load(drawChart);
 
@@ -55,6 +56,8 @@ export function drawChart(balanceUser, tag) {
       console.log("not chart");
       break;
   }
+
+
 }
 
 function GetData(balanceUser) {
