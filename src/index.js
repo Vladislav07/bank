@@ -10,6 +10,7 @@ import pageMap from './map/map';
 import getBalance from './balance/balance'
 import {ListAccountsController} from './list/controller'
 import AccountController from './account/accountController'
+import logOutController from './logOut/logOutController';
 
 const body = document.querySelector("#root");
 
@@ -41,7 +42,7 @@ router
     clear();
     sessionStorage.removeItem("key");
     beforeRouter(false);
-    mount(body, pageLogOut());
+    logOutController();
   })
   .on("/list", () => {
     ListAccountsController();

@@ -42,6 +42,12 @@ export class FormLabel {
   }
 }
 
+export class InputError {
+  constructor( className) {
+    this.el = el(`.${className}`);
+  }
+}
+
 export class Group {
   constructor(prefix, array) {
     this.el = el(`.${prefix}__group`, array);
@@ -59,7 +65,7 @@ export class Select {
     this.el = el(`Select.${className}__select`, {
       id: name,
       name: name,
-    
+
     })
   }
 }

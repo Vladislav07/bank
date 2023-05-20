@@ -4,21 +4,13 @@
 .logOut {
   &__container {
     @include container;
-    padding: 0 15px;
+    padding-top: 262px;
   }
 
   &__form {
-    display: grid;
-    grid-template-columns: max-content, 300px;
-    grid-template-rows: max-content, max-content, max-content, max-content;
-    row-gap: 25px;
-    align-items: center;
-    align-content: space-between;
-    border-radius: 50px;
+
     width: 500px;
     margin: 0 auto;
-    padding: 50px;
-    background-color: #f3f4f6;
   }
 
   &__title:nth-child(1) {
@@ -70,8 +62,10 @@
 
   &__btn{
     @include btn;
-    margin: 0 auto;
+    margin-right: auto;
     background-color: $brand-primary;
     color:#fff;
   }
+
+
 }

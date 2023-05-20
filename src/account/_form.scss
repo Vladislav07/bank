@@ -3,16 +3,15 @@
 
 .form {
   display: grid;
-  grid-template-columns: max-content, 300px;
-  grid-template-rows: max-content, max-content, max-content, max-content;
+  grid-template-columns: max-content 300px;
+  grid-template-rows: max-content max-content max-content max-content;
   row-gap: 25px;
   column-gap: 18px;
   justify-content: flex-start;
-  justify-items: flex-end;
+  justify-items: flex-start;
   align-items: center;
   align-content: space-between;
   border-radius: 50px;
-  width: 606px;
   padding: 50px;
   background-color: #f3f4f6;
 
