@@ -1,7 +1,5 @@
 import { el, mount, setChildren } from "redom";
 import "./_logOut.scss";
-import { authorizationRequest } from "../utils/server_access";
-import router from "../index";
 import {
   Page,
   Section,
@@ -14,26 +12,27 @@ import {
 } from "../base/base";
 
 export default class LogOut {
-  constructor(body) {
+  constructor(body, authorizationRequestToController ) {
     this.body = body;
     this.pagelogO = new Page("logOut");
     this.pageContainer = new Container("logOut");
     this.form = el("form.logOut__form.form", {
       id: "form-logOut",
     });
+    this.authorizationRequestToController = authorizationRequestToController
 
-    this.fieldLogin = new CustomInput("text", "login", "logOut__input");
-    this.fieldPassword = new CustomInput("text", "password", "logOut__input");
+    this.fieldLogin = new CustomInput("text", "login", "logOut");
+    this.fieldPassword = new CustomInput("text", "password", "logOut");
     this.labelLogin = new FormLabel("Логин", "logOut__label");
     this.labelPassword = new FormLabel("Пароль", "logOut__label");
-    this.ErrorLogin = new InputError ('logOut__loginError')
+    this.ErrorLogin = new InputError("logOut__loginError");
 
     this.btn = new Btn("Войти", "submit", "logOut");
     setChildren(this.form, [
       el("h2.logOut__title", "Вход в аккаунт"),
       this.labelLogin,
       this.fieldLogin,
-      this.ErrorLogin ,
+      this.ErrorLogin,
       this.labelPassword,
       this.fieldPassword,
       this.btn,
@@ -45,54 +44,9 @@ export default class LogOut {
 
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
-
-      authorizationRequest().then((isOut) => {
-        if (isOut) {
-          router.navigate("/list");
-        }
-      });
+     this.authorizationRequestToController()
     });
   }
+
+
 }
-
-// function pageLogOut(body) {
-//   const pagelogO = new Page("logOut");
-//   const pageContainer = new Container("logOut");
-
-//   const form = el("form.logOut__form.form", {
-//     id: "form-logOut",
-//   });
-
-//   form.addEventListener("submit", (e) => {
-
-//     e.preventDefault();
-
-//     authorizationRequest().then((isOut) => {
-//       if (isOut) {
-//         router.navigate("/list");
-//       }
-//     });
-//   });
-
-//   const fieldLogin = new CustomInput("text", "login", "logOut__input");
-//   const fieldPassword = new CustomInput("text", "password", "logOut__input");
-//   const labelLogin = new FormLabel("Логин", "logOut__label");
-//   const labelPassword = new FormLabel("Пароль", "logOut__label");
-
-//   const btn = new Btn("Войти", "submit", "logOut");
-//   setChildren(form, [
-//     el("h2.logOut__title", "Вход в аккаунт"),
-//     labelLogin,
-//     fieldLogin,
-//     labelPassword,
-//     fieldPassword,
-//     btn,
-//   ]);
-
-//   mount(pageContainer, form);
-//   mount(pagelogO, pageContainer);
-//   mount(body, pagelogO);
-
-// }
-
-//export { pageLogOut as default };

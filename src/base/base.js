@@ -26,13 +26,26 @@ export class Section {
   }
 }
 
-export class CustomInput {
+export class CustomInput1 {
   constructor(type, name, className) {
     this.el = el(`input.${className}`, {
       type: type,
       name: name,
       required: "true",
     });
+  }
+}
+export class CustomInput {
+  constructor(type, name, className) {
+    this.el = el(`.${className}__group`, [
+      el(`input.${className}__input`,
+      {
+        type: type,
+        name: name,
+        required: "true",
+      }),
+      el(`.${className}__valid`)
+    ]);
   }
 }
 
@@ -43,7 +56,7 @@ export class FormLabel {
 }
 
 export class InputError {
-  constructor( className) {
+  constructor(className) {
     this.el = el(`.${className}`);
   }
 }
@@ -65,15 +78,16 @@ export class Select {
     this.el = el(`Select.${className}__select`, {
       id: name,
       name: name,
-
-    })
+    });
   }
 }
 
 export class Btn {
   constructor(text, type, className, classNameExtra) {
     this.el = el(
-     classNameExtra? `button.${className}__btn.${classNameExtra}`:`button.${className}__btn`,
+      classNameExtra
+        ? `button.${className}__btn.${classNameExtra}`
+        : `button.${className}__btn`,
       {
         type: type,
       },
