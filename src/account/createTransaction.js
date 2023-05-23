@@ -3,7 +3,7 @@ import "./_form.scss";
 import "./_account.scss";
 
 //import {} from '../utils/server_access';
-import { CustomInput, FormLabel, Btn } from "../base/base";
+import { CustomInput, FormLabel, Btn, Select } from "../base/base";
 
 function createTransaction(body, prefix) {
   const form = el(`form.${prefix}__form.form`, {
@@ -14,12 +14,14 @@ function createTransaction(body, prefix) {
     e.preventDefault();
   });
 
-  const fieldNumber = new CustomInput("text", "login", `${prefix}__input.form__input`);
-  const fieldAmount = new CustomInput("text", "password", `${prefix}__input.form__input`);
+  const fieldNumber = new Select( "destinationAccount", `${prefix}.form`);
+
+  const fieldAmount = new CustomInput("text", "password", `${prefix}__input.form`);
   const labelNumber = new FormLabel(
     "Номер счета получателя",
     `${prefix}__label.form__label`
   );
+
   const labelAmount = new FormLabel("Сумма перевода", `${prefix}__label.form__label`);
 
   const btn = new Btn("Войти", "submit", 'form');
@@ -32,8 +34,11 @@ function createTransaction(body, prefix) {
     fieldAmount,
     btn,
   ]);
-  //return form;
+
   mount(body, form)
+ 
 }
 
 export { createTransaction as default };
+
+

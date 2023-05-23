@@ -22,8 +22,10 @@ export function ListAccountsController() {
       SetSelect(data, pageList)
       const btn = document.querySelector(".register__btn");
       btn.addEventListener("click", () => {
-        createaAccount();
-        renderCardsAccount();
+       createaAccount().then(data =>{
+        pageList.renderCard(data.payload)
+       })
+      
       });
     };
   })
@@ -90,6 +92,8 @@ function SetSelect(data, pageList) {
       disabled: false,
     },
   ]);
+
+ 
 
   select.passedElement.element.addEventListener("change", (value) => {
   const  arrAccount = Sorting(data, value.detail.value);

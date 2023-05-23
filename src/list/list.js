@@ -58,6 +58,17 @@ export class ListPage {
       );
     });
   }
+  renderCard(card) {
+      mount(
+        this.wrapper,
+        getCard(
+          this.prefix,
+          card.account,
+          card.balance,
+          card.transactions.length > 0 ? card.transactions[0].date : ""
+        )
+      );
+  }
 
 }
 

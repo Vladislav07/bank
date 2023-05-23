@@ -1,5 +1,6 @@
 import { el, mount, setChildren } from "redom";
 import currency from "currency.js";
+import Choices from "choices.js";
 import "../_base.scss";
 import header from "../header/header";
 import AccountPage from "./account";
@@ -12,12 +13,17 @@ const body = document.querySelector("#root");
 
 
 export default function AccountController(number) {
- // clear();
-  // beforeRouter();
   const page = new AccountPage(body);
+  
   accountDetails(number).then((data) => {
-    const formatDate = SortDataTransaction(data.transactions, data.amount, data.account);
-    page.renderBody(data.account, data.amount, TransformationTrans(data.transactions), formatDate)
+    if(data.transactions.length ===0){
+      page.renderBody(data.account, 0, [], [])
+    }
+    else{
+     const formatDate = SortDataTransaction(data.transactions, data.amount, data.account);
+     page.renderBody(data.account, data.amount, TransformationTrans(data.transactions), formatDate) 
+    }
+    SetSelect()
   })
 }
 
@@ -101,4 +107,61 @@ function TransformationTrans(trans) {
     })
   })
   return transaction;
+}
+
+function SetSelect() {
+  const elem = document.getElementById("destinationAccount");
+  const select = new Choices(elem, {
+    silent: false,
+    items: [],
+    choices: [],
+    renderChoiceLimit: -1,
+    maxItemCount: -1,
+    addItems: true,
+    addItemFilter: null,
+    removeItems: true,
+    removeItemButton: false,
+    editItems: false,
+    allowHTML: false,
+    duplicateItemsAllowed: true,
+    delimiter: ",",
+    paste: false,
+    searchEnabled: false,
+    searchChoices: true,
+    searchFloor: 1,
+    searchResultLimit: 3,
+    searchFields: ["label", "value"],
+    position: "auto",
+    resetScrollPosition: true,
+    shouldSort: true,
+    shouldSortItems: false,
+    placeholder: false,
+    placeholderValue: null,
+    searchPlaceholderValue: null,
+    prependValue: null,
+    appendValue: null,
+    renderSelectedChoices: "auto",
+    itemSelectText: "",
+  });
+
+  select.setValue([
+    { value: "account", label: "По номеру" },
+    { value: "balance", label: "По балансу" },
+    { value: "transaction.date", label: "По последней транзакции" },
+    {
+      value: "placeholder",
+      label: "Сортировка",
+      selected: false,
+      disabled: false,
+    },
+  ]);
+
+ 
+
+  select.passedElement.element.addEventListener("change", (value) => {
+
+    console.log('arrAccount');
+  });
+
+
 }
