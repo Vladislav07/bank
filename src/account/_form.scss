@@ -69,3 +69,6 @@
     color: #fff;
   }
 }
+.choices[data-type*=select-one] {
+  cursor:text;
+}
