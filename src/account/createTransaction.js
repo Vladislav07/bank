@@ -15,7 +15,6 @@ function createTransaction(body, prefix) {
   });
 
   const fieldNumber = new Select( "destinationAccount", `${prefix}.form`);
-
   const fieldAmount = new CustomInput("text", "password", `${prefix}__input.form`);
   const labelNumber = new FormLabel(
     "Номер счета получателя",
@@ -36,7 +35,7 @@ function createTransaction(body, prefix) {
   ]);
 
   mount(body, form)
- 
+
 }
 
 export { createTransaction as default };
