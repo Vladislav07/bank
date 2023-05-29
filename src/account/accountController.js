@@ -33,7 +33,7 @@ export default function AccountController(number) {
         getListTransferAccounts(data.transactions, data.account);
       }
     }
-        SetSelect(data.account);
+    SetSelect(data.account);
   });
 }
 
@@ -124,38 +124,36 @@ function SetSelect(key) {
   const storageAccounts = JSON.parse(localStorage.getItem(key)).it;
   const choices = new Choices(elem, {
     noChoicesText: "",
+    maxItemCount: 3,
     searchPlaceholderValue: "Начните вводить номер счета",
-    itemSelectText: '',
-    // addItemFilter:/[0-9]/,
-    customAddItemText: 'Only values matching specific conditions can be added',
-
-      // addItemText: (value) => {
-
-      //     return value; // findNumberAccount(value)
-      // }
+    itemSelectText: "",
+    addItemFilter: /[0-9]/,
+    searchPlaceholderValue:true,
+    maxItemText: (maxItemCount) => {
+      return `Only ${maxItemCount} values can be added`;
+    },
+    addItemText: (value) => {
+     // addOptionsToSelect(value)
+    },
   });
 
+  choices.setValue(['gggggggggg','yyyyyyyyyy'])
+
+  function add(params) {
+    choices.appendValue(params);
+  }
 
 
-  choices.passedElement.element.addEventListener("search", (event) => {
-    event.preventDefault();
-    if(event.detail.value ===''){
-      choices.clearChoices();
-      choices.clearStore();
-      choices.setValue([]);
-    }
-    addOptionsToSelect(event.detail.value);
-  });
 
   function addOptionsToSelect(searchStr) {
     const arr = findMatches(searchStr, storageAccounts);
-    choices.clearChoices();
-    choices.clearStore();
-    choices.setValue(arr);
+     choices.clearChoices();
+     choices.clearStore();
+     choices.setValue(arr)
   }
 
   choices.passedElement.element.addEventListener("addItem", (value) => {
-    console.log("arrAccount");
+    //
   });
 
   function findMatches(search, options) {
@@ -168,11 +166,11 @@ function SetSelect(key) {
 
 function symbolIsNumber(symbol) {
   console.log(symbol.charCodeAt(0));
-  // if (symbol.charCodeAt(0) < 48 || symbol.charCodeAt(0) > 57) {
-  //   return false;
-  // } else {
-  //   return true;
-  // }
+  if (symbol.charCodeAt(0) < 48 || symbol.charCodeAt(0) > 57) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function getListTransferAccounts(transList, account) {
@@ -184,8 +182,9 @@ function getListTransferAccounts(transList, account) {
     } else {
       temp = trans.from;
     }
-    if (list.includes(temp)) return;
-    list.push(temp);
+    if (!list.includes(temp)) {
+      list.push(temp);
+    }
   });
   localStorage.setItem(account, JSON.stringify({ it: list }));
 }

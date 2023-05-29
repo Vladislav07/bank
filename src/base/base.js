@@ -78,7 +78,17 @@ export class Select {
     this.el = el(`Select.${className}__select`, {
       id: name,
       name: name,
-      one: true
+      text: true
+    });
+  }
+}
+
+export class InputChoices {
+  constructor(name, className) {
+    this.el = el(`Input.${className}__select`, {
+      id: name,
+      name: name,
+      type: 'text'
     });
   }
 }

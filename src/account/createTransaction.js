@@ -3,7 +3,7 @@ import "./_form.scss";
 import "./_account.scss";
 
 //import {} from '../utils/server_access';
-import { CustomInput, FormLabel, Btn, Select } from "../base/base";
+import { CustomInput, FormLabel, Btn, Select, InputChoices } from "../base/base";
 
 function createTransaction(body, prefix) {
   const form = el(`form.${prefix}__form.form`, {
