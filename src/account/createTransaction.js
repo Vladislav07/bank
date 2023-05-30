@@ -2,7 +2,6 @@ import { el, mount, setChildren } from "redom";
 import "./_form.scss";
 import "./_account.scss";
 
-//import {} from '../utils/server_access';
 import { CustomInput, FormLabel, Btn, Select, InputChoices } from "../base/base";
 
 function createTransaction(body, prefix) {

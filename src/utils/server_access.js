@@ -6,6 +6,8 @@ const user = {
   password: "skillbox",
 };
 
+const cssPromises = {};
+
 let token='';
 
 export async function authorizationRequest() {
@@ -209,5 +211,21 @@ export async function getGeoLocation() {
   } catch (error) {
     console.log(error.message);
   }
+}
+
+export function loadResourses(src) {
+
+    if (!cssPromises[src]) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = src;
+      cssPromises[src] = new Promise((resolve) => {
+        link.addEventListener('load', () => resolve());
+      });
+      const linkMainCCS = document.querySelector("link");
+      linkMainCCS.before(link);
+
+    }
+    return cssPromises[src];
 }
 

@@ -20,12 +20,12 @@ export default function AccountController(number) {
     } else {
       const formatDate = SortDataTransaction(
         data.transactions,
-        data.amount,
+        data.balance,
         data.account
       );
       page.renderBody(
         data.account,
-        data.amount,
+        data.balance,
         TransformationTrans(data.transactions),
         formatDate
       );

@@ -24,12 +24,7 @@ export class ListPage {
     this.page = new Page(this.prefix);
     this.container = new Container(this.prefix);
     this.wrapper = el(`.${this.prefix}__wrapper`);
-    this.styleChoises = el("link", {
-      rel: "stylesheet",
-      href: "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
-    });
-    this.linkMainCCS = document.querySelector("link");
-    this.linkMainCCS.before(this.styleChoises);
+
 
     setChildren(this.container, [
       new Group(this.prefix, [
@@ -42,7 +37,11 @@ export class ListPage {
     mount(this.container, this.wrapper);
     mount(this.page, this.container);
     mount(this.body, this.page);
+
+
   }
+
+
 
   renderCards(data) {
     this.wrapper.innerHTML = "";

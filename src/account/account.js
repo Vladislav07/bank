@@ -36,12 +36,12 @@ export default class AccountPage {
       id: "chart",
     });
     setChildren(this.sectionChart, [this.titleChart, this.tag]);
-    this.styleChoises = el("link", {
-      rel: "stylesheet",
-      href: "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
-    });
-    this.linkMainCCS = document.querySelector("link");
-    this.linkMainCCS.before(this.styleChoises);
+    // this.styleChoises = el("link", {
+    //   rel: "stylesheet",
+    //   href: "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
+    // });
+    // this.linkMainCCS = document.querySelector("link");
+    // this.linkMainCCS.before(this.styleChoises);
   }
 
 
@@ -50,7 +50,7 @@ export default class AccountPage {
     setChildren(this.container, [
       new Group(this.prefix, [
         new SectionTitle("Просмотр счета", this.prefix),
-        new Link("/list", "Вернуться назад", this.prefix),
+        new Link("#/list", "Вернуться назад", this.prefix),
         el(`h3.${this.prefix}__number`, number),
         el(`.${this.prefix}__residue`, [
           el(`span.${this.prefix}__label`, `Баланс`),

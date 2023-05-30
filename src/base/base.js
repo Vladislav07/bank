@@ -78,7 +78,7 @@ export class Select {
     this.el = el(`Select.${className}__select`, {
       id: name,
       name: name,
-      text: true
+      one:true
     });
   }
 }

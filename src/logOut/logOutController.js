@@ -3,7 +3,7 @@ import "../_base.scss";
 import LogOut from "./logout";
 import router from "../index";
 
-import {authorizationRequest, accountDetails, createaAccount } from "../utils/server_access";
+import {authorizationRequest, loadResourses } from "../utils/server_access";
 
 const body = document.querySelector("#root");
 
@@ -63,7 +63,10 @@ function authorizationRequestToController() {
 //  if(!loginValid || !passwordValid)return;
   authorizationRequest().then((isOut) => {
     if (isOut) {
-      router.navigate("/list");
+      loadResourses("https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css")
+      .then(()=>{
+        router.navigate("/list");
+      })
     }
   });
 
