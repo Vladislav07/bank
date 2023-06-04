@@ -16,7 +16,6 @@ import {
   Btn,
 } from "../base/base";
 
-
 export class ListPage {
   constructor(body_) {
     this.body = body_;
@@ -24,12 +23,12 @@ export class ListPage {
     this.page = new Page(this.prefix);
     this.container = new Container(this.prefix);
     this.wrapper = el(`.${this.prefix}__wrapper`);
-
+    this.select = new Select("accounts", this.prefix);
 
     setChildren(this.container, [
       new Group(this.prefix, [
         new SectionTitle("Ваши счета", this.prefix),
-        new Select("accounts", this.prefix),
+        this.select,
         new Btn("+ Создать новый счет", "button", this.prefix),
       ]),
     ]);
@@ -37,11 +36,11 @@ export class ListPage {
     mount(this.container, this.wrapper);
     mount(this.page, this.container);
     mount(this.body, this.page);
-
-
   }
 
-
+  getSelect() {
+    return this.select;
+  }
 
   renderCards(data) {
     this.wrapper.innerHTML = "";
@@ -58,16 +57,14 @@ export class ListPage {
     });
   }
   renderCard(card) {
-      mount(
-        this.wrapper,
-        getCard(
-          this.prefix,
-          card.account,
-          card.balance,
-          card.transactions.length > 0 ? card.transactions[0].date : ""
-        )
-      );
+    mount(
+      this.wrapper,
+      getCard(
+        this.prefix,
+        card.account,
+        card.balance,
+        card.transactions.length > 0 ? card.transactions[0].date : ""
+      )
+    );
   }
-
 }
-

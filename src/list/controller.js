@@ -18,17 +18,19 @@ export function ListAccountsController() {
   listOfUserAccounts().then((data) => {
     const pageList = new ListPage(body);
     pageList.renderCards(data);
+    // window.onload = function () {
+    //   const btn = document.querySelector(".register__btn");
+    //   btn.addEventListener("click", () => {
+    //     createaAccount().then((data) => {
+    //       pageList.renderCard(data.payload);
+    //     });
+    //   });
+    // };
+   window.addEventListener('load', SetSelect(data, pageList))
 
-    window.onload = function () {
-    //  SetSelect(data, pageList);
-      const btn = document.querySelector(".register__btn");
-      btn.addEventListener("click", () => {
-        createaAccount().then((data) => {
-          pageList.renderCard(data.payload);
-        });
-      });
-    };
-  });
+    })
+
+
 }
 
 const render = (content) => {
