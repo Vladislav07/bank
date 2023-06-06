@@ -38,9 +38,7 @@ export class ListPage {
     mount(this.body, this.page);
   }
 
-  getSelect() {
-    return this.select;
-  }
+ 
 
   renderCards(data) {
     this.wrapper.innerHTML = "";

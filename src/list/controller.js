@@ -18,19 +18,16 @@ export function ListAccountsController() {
   listOfUserAccounts().then((data) => {
     const pageList = new ListPage(body);
     pageList.renderCards(data);
-    // window.onload = function () {
-    //   const btn = document.querySelector(".register__btn");
-    //   btn.addEventListener("click", () => {
-    //     createaAccount().then((data) => {
-    //       pageList.renderCard(data.payload);
-    //     });
-    //   });
-    // };
-   window.addEventListener('load', SetSelect(data, pageList))
-
-    })
-
-
+    window.onload = function () {
+      SetSelect(data, pageList);
+      const btn = document.querySelector(".register__btn");
+      btn.addEventListener("click", () => {
+        createaAccount().then((data) => {
+          pageList.renderCard(data.payload);
+        });
+      });
+    };
+  });
 }
 
 const render = (content) => {
@@ -48,10 +45,11 @@ function clear() {
 }
 
 function SetSelect(data, pageList) {
-  const elem = document.querySelector(".accounts");
+  const elem = document.querySelector("#accounts");
+
   const select = new Choices(elem);
 
-  select.setValue([
+  select.setChoices([
     { value: "account", label: "По номеру" },
     { value: "balance", label: "По балансу" },
     { value: "transaction.date", label: "По последней транзакции" },
@@ -61,7 +59,7 @@ function SetSelect(data, pageList) {
       selected: false,
       disabled: false,
     },
- ]);
+  ]);
 
   select.passedElement.element.addEventListener("change", (value) => {
     const arrAccount = Sorting(data, value.detail.value);
@@ -76,6 +74,6 @@ function SetSelect(data, pageList) {
   }
 
   select.passedElement.element.addEventListener("change", (value) => {
-
- });
+    console.log(value);
+  });
 }
