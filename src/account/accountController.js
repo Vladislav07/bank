@@ -7,7 +7,11 @@ import AccountPage from "./account";
 import pageCurrency from "../currency/currency";
 import pageMap from "../map/map";
 import getBalance from "../balance/balance";
-import { accountDetails, createaAccount } from "../utils/server_access";
+import {
+  accountDetails,
+  createaAccount,
+  loadResourses,
+} from "../utils/server_access";
 
 const body = document.querySelector("#root");
 
@@ -33,6 +37,11 @@ export default function AccountController(number) {
         getListTransferAccounts(data.transactions, data.account);
       }
     }
+    window.onload = function () {
+      loadResourses(
+        "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+      );
+    };
     SetSelect(data.account);
   });
 }
@@ -128,28 +137,26 @@ function SetSelect(key) {
     searchPlaceholderValue: "Начните вводить номер счета",
     itemSelectText: "",
     addItemFilter: /[0-9]/,
-    searchPlaceholderValue:true,
+    searchPlaceholderValue: true,
     maxItemText: (maxItemCount) => {
       return `Only ${maxItemCount} values can be added`;
     },
     addItemText: (value) => {
-     // addOptionsToSelect(value)
+       addOptionsToSelect(value)
     },
   });
 
-  choices.setValue(['gggggggggg','yyyyyyyyyy'])
+  //choices.setValue(storageAccounts);
 
   function add(params) {
     choices.appendValue(params);
   }
 
-
-
   function addOptionsToSelect(searchStr) {
     const arr = findMatches(searchStr, storageAccounts);
-     choices.clearChoices();
-     choices.clearStore();
-     choices.setValue(arr)
+    choices.clearChoices();
+    choices.clearStore();
+    choices.setValue(arr);
   }
 
   choices.passedElement.element.addEventListener("addItem", (value) => {

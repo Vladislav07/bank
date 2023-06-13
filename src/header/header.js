@@ -6,6 +6,7 @@ import { Container, Section, Link, Btn } from "../base/base";
 function header(isViewButton) {
   const header = new Section("header");
   const headerContainer = new Container("header");
+  mount(headerContainer,el("span.header__logo", "Coin."));
   mount(header, headerContainer);
 
   if (!isViewButton) {

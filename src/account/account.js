@@ -3,7 +3,7 @@ import history from "../history/history";
 import "./_account.scss";
 import "../utils/_chart.scss";
 import createTransaction from "./createTransaction";
-import { accountDetails } from "../utils/server_access";
+import { accountDetails, loadResourses } from "../utils/server_access";
 import { drawChart } from "../utils/charts";
 import { SortDataTransaction } from "../utils/charts";
 import { GoogleCharts } from "../utils/googleCharts.esm";

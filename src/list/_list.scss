@@ -3,8 +3,8 @@
 
 .register {
   &__container {
-    @include container; 
-    padding: 50px;  
+    @include container;
+    padding: 50px;
   }
 
   &__group {
@@ -15,7 +15,7 @@
 
     .choices{
       justify-items: flex-start;
-      margin-right: auto;
+     margin-right: auto;
     }
   }
 

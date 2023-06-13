@@ -31,6 +31,10 @@ function courseChanges(parent) {
     }
   };
 
+  // const pageParent = document.querySelector('.currency')
+  // pageParent.unload =  function() {
+  //   socket.close()
+  // };
   return sectionRate;
 }
 

@@ -63,10 +63,9 @@ function authorizationRequestToController() {
 //  if(!loginValid || !passwordValid)return;
   authorizationRequest().then((isOut) => {
     if (isOut) {
-      loadResourses("https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css")
-      .then(()=>{
+
         router.navigate("/list");
-      })
+    
     }
   });
 

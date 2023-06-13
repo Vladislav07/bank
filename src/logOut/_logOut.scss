@@ -16,6 +16,7 @@
   &__title:nth-child(1) {
     grid-row: 1;
     grid-column: 2;
+    justify-self: flex-start;
     font-size: 34px;
     line-height: 40px;
     font-weight: 700;
@@ -60,7 +61,7 @@
     color: red;
   }
 
-  &__btn:nth-child(6) {
+  &__btn {
     grid-row: 4;
     grid-column: 2;
   }
