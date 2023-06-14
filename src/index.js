@@ -1,7 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import Navigo from "navigo";
 import "./_base.scss";
-import pageLogOut from "./logOut/logout";
+import currencyController from "./currency/currencyController";
 import header from "./header/header";
 import list from "./list/list";
 import detailsAccount from "./account/account";
@@ -56,7 +56,9 @@ router
     render(getBalance(id));
   })
   .on("/currency", () => {
-    render(pageCurrency())
+    clear();
+    beforeRouter();
+    currencyController();
   })
   .on("/location", () => {
     render(pageMap())

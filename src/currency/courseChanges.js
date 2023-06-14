@@ -4,9 +4,9 @@ import {  Container, Section } from "../base/base";
 import up from "../assets/images/Vector_up.svg";
 import bottom from "../assets/images/Vector_bottom.svg";
 
-function courseChanges(parent) {
-  const socket = new WebSocket("ws://localhost:3000/currency-feed");
+function courseChanges(parent, socket) {
   const prefix = "rate";
+  const countStrok = 10;
   const sectionRate = new Section(prefix, parent);
   const container = new Container(prefix);
   const title = el(
@@ -31,10 +31,10 @@ function courseChanges(parent) {
     }
   };
 
-  // const pageParent = document.querySelector('.currency')
-  // pageParent.unload =  function() {
-  //   socket.close()
-  // };
+  setTimeout(()=>{
+    const h =  document.querySelector('.rate__list').of
+   console.log(h)
+  },1000)
   return sectionRate;
 }
 

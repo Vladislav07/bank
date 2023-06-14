@@ -36,12 +36,6 @@ export default class AccountPage {
       id: "chart",
     });
     setChildren(this.sectionChart, [this.titleChart, this.tag]);
-    // this.styleChoises = el("link", {
-    //   rel: "stylesheet",
-    //   href: "https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css",
-    // });
-    // this.linkMainCCS = document.querySelector("link");
-    // this.linkMainCCS.before(this.styleChoises);
   }
 
 

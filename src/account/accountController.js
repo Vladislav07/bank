@@ -1,17 +1,8 @@
-import { el, mount, setChildren } from "redom";
 import currency from "currency.js";
 import Choices from "choices.js";
 import "../_base.scss";
-import header from "../header/header";
 import AccountPage from "./account";
-import pageCurrency from "../currency/currency";
-import pageMap from "../map/map";
-import getBalance from "../balance/balance";
-import {
-  accountDetails,
-  createaAccount,
-  loadResourses,
-} from "../utils/server_access";
+import { accountDetails, loadResourses } from "../utils/server_access";
 
 const body = document.querySelector("#root");
 
@@ -142,7 +133,7 @@ function SetSelect(key) {
       return `Only ${maxItemCount} values can be added`;
     },
     addItemText: (value) => {
-       addOptionsToSelect(value)
+      addOptionsToSelect(value);
     },
   });
 

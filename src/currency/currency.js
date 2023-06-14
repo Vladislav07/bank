@@ -1,40 +1,36 @@
-import { el, mount, setChildren } from "redom";
+import { mount, setChildren } from "redom";
 import "./_currency.scss";
-import pageRate  from './courseChanges';
-import yourCurrency from './yourCurrency';
-import currencyExchange from './currencyExchange'
-import {
-  Page,
-  Section,
-  Container,
-  CustomInput,
-  Group,
-  FormLabel,
-  SectionTitle,
-  Select,
-  Btn,
-} from "../base/base";
+import pageRate from "./courseChanges";
+import yourCurrency from "./yourCurrency";
+import currencyExchange from "./currencyExchange";
+import { Page, Container, Group, SectionTitle } from "../base/base";
 
-function pageCurrency() {
-  const prefix = "currency";
-  const page = new Page(prefix);
-  const container = new Container(prefix);
-
-
-  setChildren(container, [
-    new SectionTitle("Валютный обмен", prefix),
-    new Group(prefix, [
-      yourCurrency(prefix),
-      currencyExchange(prefix),
-      pageRate(prefix),
-
-    ]),
-  ]);
+export default class Currency {
+  constructor(body_, socket_) {
+    this.body = body_;
+    this.prefix = "currency";
+    this.page = new Page(this.prefix);
+    this.container = new Container(this.prefix);
+    this.socket = socket_;
+    setChildren(this.container, [
+      new SectionTitle("Валютный обмен", this.prefix),
+      new Group(this.prefix, [
+        yourCurrency(this.prefix),
+        currencyExchange(this.prefix),
+        pageRate(this.prefix, this.socket),
+      ]),
+    ]);
 
 
-  mount(page, container);
 
-  return page;
+
+    mount(this.page, this.container);
+    mount(this.body, this.container);
+  }
+    closeSocket(){
+      window.addEventListener('popstate', function(){
+        console.log('location changed!');
+      })
+    }
+
 }
-
-export { pageCurrency as default };

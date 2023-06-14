@@ -1,5 +1,6 @@
 import { el, mount } from "redom";
 
+
 export class Page {
   constructor(page) {
     this.el = el(`main.${page}`);
@@ -82,6 +83,8 @@ export class Select {
     });
   }
 }
+
+
 
 export class InputChoices {
   constructor(name, className) {
