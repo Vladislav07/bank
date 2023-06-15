@@ -1,16 +1,16 @@
 import {
-  authorizationRequest,
-  listOfUserAccounts,
-  accountDetails,
-  createaAccount,
-  allCurrencies,
-  userCurrencies,
-  webSocketStrim
-} from './server_access.js';
+ authorizationRequest,
+ listOfUserAccounts,
+ accountDetails,
+ createaAccount,
+ allCurrencies,
+ userCurrencies,
+ webSocketStrim,
+} from './server_access.js'
 
 import './index.scss'
 
-console.log('start');
+console.log('start')
 
 // authorizationRequest().then((token) => {
 //   listOfUserAccounts(token).then((id) => {
@@ -18,13 +18,11 @@ console.log('start');
 //   });
 // });
 
-
 // authorizationRequest().then((token) => {
 //     createaAccount(token),
 //     userCurrencies(token)
 //   });
 
- // allCurrencies();
-
+// allCurrencies();
 
 //  webSocketStrim()

@@ -2,15 +2,13 @@
 @import '../var';
 
 .map {
-
-  &__container {
-    @include container;
-    padding: 25px 50px;
-  }
+ &__container {
+  @include container;
+  padding: 25px 50px;
+ }
 }
 
-
-#map{
-  width: 100%;
-  height: 728px;
+#map {
+ width: 100%;
+ height: 728px;
 }

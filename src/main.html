@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="dist/css/tabulator.min.css" rel="stylesheet">
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"
-  type="text/javascript">
-  </script>
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="dist/css/tabulator.min.css" rel="stylesheet" />
+  <script
+   src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"
+   type="text/javascript"
+  ></script>
   <script type="text/javascript">
-    ymaps.ready(function () {
-      var myMap = new ymaps.Map("YMapsID", {
-        center: [55.76, 37.64],
-        zoom: 10
-      });
-    });
+   ymaps.ready(function () {
+    var myMap = new ymaps.Map('YMapsID', {
+     center: [55.76, 37.64],
+     zoom: 10,
+    })
+   })
   </script>
   <title>Document</title>
-</head>
-<body>
-  <div id="YMapsID" style="width: 450px; height: 350px;"></div> 
-</body>
+ </head>
+ <body>
+  <div id="YMapsID" style="width: 450px; height: 350px"></div>
+ </body>
 </html>

@@ -2,16 +2,14 @@
 @import '../var';
 
 .history {
+ &__container {
+  @include container;
+  padding: 50px;
+  border-radius: 56px;
+  background-color: #f3f4f6;
+ }
 
-  &__container {
-    @include container;
-    padding: 50px;
-    border-radius: 56px;
-    background-color: #F3F4F6;
-  }
-
-
-  &__title {
-    @include titleSection;
-  }
+ &__title {
+  @include titleSection;
+ }
 }

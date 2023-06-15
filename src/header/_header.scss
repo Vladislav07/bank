@@ -2,33 +2,31 @@
 @import '../var';
 
 .header {
+ &__container {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 50px;
+  background-color: $brand-primary;
+  height: 100px;
+ }
 
-  &__container {
-    @include container;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 50px;
-    background-color: $brand-primary;
-    height: 100px;
-  }
+ &__logo {
+  margin-right: auto;
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 300;
+  color: #fff;
+ }
 
-  &__logo{
-    margin-right: auto;
-    font-size: 48px;
-    line-height: 56px;
-    font-weight: 300;
-    color: #fff;
-  }
+ &__btn {
+  @include btn;
+  background-color: #fff;
+  color: $brand-primary;
+ }
 
-  &__btn {
-    @include btn;
-    background-color: #fff;
-    color: $brand-primary;
-  }
-
-  &__btn:not(:last-child){
-    margin-right: 25px;
-  }
-
+ &__btn:not(:last-child) {
+  margin-right: 25px;
+ }
 }

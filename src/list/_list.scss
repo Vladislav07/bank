@@ -2,42 +2,42 @@
 @import '../var';
 
 .register {
-  &__container {
-    @include container;
-    padding: 50px;
-  }
+ &__container {
+  @include container;
+  padding: 50px;
+ }
 
-  &__group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+ &__group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
 
-    .choices{
-      justify-items: flex-start;
-     margin-right: auto;
-    }
+  .choices {
+   justify-items: flex-start;
+   margin-right: auto;
   }
+ }
 
-  &__title {
-    @include title;
-    margin-right: 35px;
-  }
+ &__title {
+  @include title;
+  margin-right: 35px;
+ }
 
-  &__select{
-    margin-right: auto;
-  }
+ &__select {
+  margin-right: auto;
+ }
 
-  &__btn {
-    @include btn;
-    background-color: $brand-primary;
-    color: #fff;
-  }
+ &__btn {
+  @include btn;
+  background-color: $brand-primary;
+  color: #fff;
+ }
 
-  &__wrapper {
-    display: grid;
-    grid-template-columns: 400px 400px 400px;
-    row-gap: 50px;
-    column-gap: 70px;
-  }
+ &__wrapper {
+  display: grid;
+  grid-template-columns: 400px 400px 400px;
+  row-gap: 50px;
+  column-gap: 70px;
+ }
 }

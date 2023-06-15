@@ -2,64 +2,59 @@
 @import '../var';
 
 .cumulation {
+ &__container {
+  @include container;
+  border-radius: 50px;
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+ }
 
+ &__title {
+  @include titleSection;
+  margin-bottom: 25px;
+ }
 
-  &__container {
-    @include container;
-    border-radius: 50px;
-    padding: 50px;
-    background-color: #fff;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
-  }
+ &__list {
+  @include listReset;
+ }
 
-  &__title {
-    @include titleSection ;
-    margin-bottom: 25px;
-  }
+ &__i:not(:last-child) {
+  margin-bottom: 25px;
+ }
 
-  &__list{
-    @include listReset;
-  }
+ &__i {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: flex-end;
+  align-content: flex-end;
+ }
 
-  &__i:not(:last-child){
-    margin-bottom: 25px;
-  }
+ &__name {
+  grid-row: 1;
+  grid-column: 1;
+  margin-right: 10px;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 600;
+ }
 
-  &__i {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: max-content 1fr max-content;
-    align-items: flex-end;
-    align-content: flex-end;
-  }
+ &__number {
+  grid-row: 1;
+  grid-column: 3;
+  margin-right: 15px;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 400;
+ }
 
-  &__name {
-    grid-row: 1;
-    grid-column: 1;
-    margin-right: 10px;
-    font-size: 20px;
-    line-height: 23px;
-    font-weight: 600;
-  }
-
-  &__number {
-    grid-row: 1;
-    grid-column: 3;
-    margin-right: 15px;
-    font-size: 20px;
-    line-height: 23px;
-    font-weight: 400;
-
-  }
-
-  &__separator {
-    display: inline-block;
-    align-self: flex-end;
-    grid-row: 1;
-    grid-column: 2;
-    margin-right: 10px;
-    border-bottom: 1px dotted #000;
-  }
-
-
+ &__separator {
+  display: inline-block;
+  align-self: flex-end;
+  grid-row: 1;
+  grid-column: 2;
+  margin-right: 10px;
+  border-bottom: 1px dotted #000;
+ }
 }

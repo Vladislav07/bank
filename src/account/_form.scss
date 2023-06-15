@@ -1,82 +1,82 @@
-@import "../mixin";
-@import "../var";
+@import '../mixin';
+@import '../var';
 
 .form {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  grid-template-rows: max-content max-content max-content max-content;
-  row-gap: 25px;
-  column-gap: 18px;
-  justify-items: flex-end;
-  align-items: center;
-  align-content: space-between;
-  border-radius: 50px;
-  padding: 50px;
-  background-color: #f3f4f6;
+ display: grid;
+ grid-template-columns: max-content max-content;
+ grid-template-rows: max-content max-content max-content max-content;
+ row-gap: 25px;
+ column-gap: 18px;
+ justify-items: flex-end;
+ align-items: center;
+ align-content: space-between;
+ border-radius: 50px;
+ padding: 50px;
+ background-color: #f3f4f6;
 
-  &__title:nth-child(1) {
-    grid-row: 1;
-    grid-column: 2;
-    font-size: 34px;
-    line-height: 40px;
-    font-weight: 700;
-    color: #000;
-    justify-self: flex-start;
-    margin-right: auto;
-  }
+ &__title:nth-child(1) {
+  grid-row: 1;
+  grid-column: 2;
+  font-size: 34px;
+  line-height: 40px;
+  font-weight: 700;
+  color: #000;
+  justify-self: flex-start;
+  margin-right: auto;
+ }
 
-  &__label:nth-child(2) {
-    grid-row: 2;
-    grid-column: 1;
-   justify-self: flex-end;
-  }
+ &__label:nth-child(2) {
+  grid-row: 2;
+  grid-column: 1;
+  justify-self: flex-end;
+ }
 
-  &__label:nth-child(4) {
-    grid-row: 3;
-    grid-column: 1;
-  }
+ &__label:nth-child(4) {
+  grid-row: 3;
+  grid-column: 1;
+ }
 
-  &__label {
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 500;
-  }
+ &__label {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+ }
 
-  // &__select:nth-child(3) {
-  //   grid-row: 2;
-  //   grid-column: 2;
-  // }
+ // &__select:nth-child(3) {
+ //   grid-row: 2;
+ //   grid-column: 2;
+ // }
 
-  .choices {
-    grid-row: 2;
-    grid-column: 2;
-  }
+ .choices {
+  grid-row: 2;
+  grid-column: 2;
+ }
 
-  &__group:nth-child(5) {
-    grid-row: 3;
-    grid-column: 2;
-  }
+ &__group:nth-child(5) {
+  grid-row: 3;
+  grid-column: 2;
+ }
 
-  &__input {
-    width: 300px;
-    height: 44px;
-    border: 1px solid #9ca3af;
-    border-radius: 7px;
-    background-color: #fff;
-  }
+ &__input {
+  width: 300px;
+  height: 44px;
+  border: 1px solid #9ca3af;
+  border-radius: 7px;
+  background-color: #fff;
+ }
 
-  &__btn:nth-child(6) {
-    grid-row: 4;
-    grid-column: 2;
-    justify-self: flex-start;
-  }
+ &__btn:nth-child(6) {
+  grid-row: 4;
+  grid-column: 2;
+  justify-self: flex-start;
+ }
 
-  &__btn {
-    @include btn;
-    background-color: $brand-primary;
-    color: #fff;
-  }
+ &__btn {
+  @include btn;
+  background-color: $brand-primary;
+  color: #fff;
+ }
 }
-.choices[data-type*=select-one] {
-  cursor:text;
+.choices[data-type*='select-one'] {
+ cursor: text;
 }
