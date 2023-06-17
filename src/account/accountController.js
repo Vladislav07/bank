@@ -2,6 +2,8 @@ import currency from 'currency.js'
 import Choices from 'choices.js'
 import '../_base.scss'
 import AccountPage from './account'
+import router from '../index'
+import {el} from 'redom'
 import { accountDetails, loadResourses } from '../utils/server_access'
 
 const body = document.querySelector('#root')
@@ -10,7 +12,6 @@ export default function AccountController(number) {
  const page = new AccountPage(body)
 
  accountDetails(number).then((data) => {
-  // console.log(data)
   if (data.transactions.length === 0) {
    page.renderBody(data.account, 0, [], [])
   } else {
@@ -29,12 +30,15 @@ export default function AccountController(number) {
     getListTransferAccounts(data.transactions, data.account)
    }
   }
-  window.onload = function () {
-   loadResourses(
-    'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'
-   )
-  }
+  loadResourses(
+   'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'
+  )
   SetSelect(data.account)
+  const chart = document.querySelector('#chart')
+  chart.addEventListener('click', (e) => {
+   e.preventDefault()
+   router.navigate(`balance/${number}`)
+  })
  })
 }
 
@@ -123,20 +127,28 @@ function SetSelect(key) {
  const storageAccounts = JSON.parse(localStorage.getItem(key)).it
  const choices = new Choices(elem, {
   noChoicesText: '',
-  maxItemCount: 3,
+  maxItemCount: 1,
   searchPlaceholderValue: 'Начните вводить номер счета',
   itemSelectText: '',
-  addItemFilter: /[0-9]/,
+  addItemFilter: /[0-9]*/,
   searchPlaceholderValue: true,
   maxItemText: (maxItemCount) => {
    return `Only ${maxItemCount} values can be added`
   },
   addItemText: (value) => {
-   addOptionsToSelect(value)
+  // addOptionsToSelect(value)
+   // choices.itemList.append(el('option',value))
+   // choices.choiceList.append(el('option',value))
   },
  })
 
- //choices.setValue(storageAccounts);
+ //choices.setValue(['pppp','1111'])
+
+ const l= document.querySelector('.choices__list.choices__list--dropdown')
+ l.append(el('option','value'))
+ l.append(el('option','value'))
+ l.append(el('option','value'))
+
 
  function add(params) {
   choices.appendValue(params)

@@ -9,12 +9,8 @@ import {
  Page,
  Section,
  Container,
- CustomInput,
  Group,
- FormLabel,
  SectionTitle,
- Select,
- Btn,
  Link,
  TitleSection,
 } from '../base/base'
@@ -43,7 +39,7 @@ function getBalance(number) {
    setChildren(container, [
     new Group(prefix, [
      new SectionTitle('История баланса', prefix),
-     new Link('/list', 'Вернуться назад', prefix),
+     new Link(`#/account/${number}`, 'Вернуться назад', prefix),
      el(`h3.${prefix}__number`, number),
      el(`.${prefix}__residue`, [
       el(`span.${prefix}__label`, `Баланс`),
@@ -52,7 +48,7 @@ function getBalance(number) {
     ]),
     sectionChartHistory,
     sectionChartDetail,
-    history(data.transactions, prefix),
+    history(data.transactions, null, prefix),
    ])
    return SortDataTransaction(data.transactions, data.balance, data.account)
   })

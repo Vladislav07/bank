@@ -1,22 +1,21 @@
 import { mount, setChildren } from 'redom'
 import './_currency.scss'
 import pageRate from './courseChanges'
-import yourCurrency from './yourCurrency'
-import currencyExchange from './currencyExchange'
 import { Page, Container, Group, SectionTitle } from '../base/base'
 
 export default class Currency {
- constructor(body_, socket_) {
+ constructor(body_, socket_, balance) {
   this.body = body_
   this.prefix = 'currency'
   this.page = new Page(this.prefix)
   this.container = new Container(this.prefix)
   this.socket = socket_
+  this.yourCurrency = balance
   setChildren(this.container, [
    new SectionTitle('Валютный обмен', this.prefix),
    new Group(this.prefix, [
-    yourCurrency(this.prefix),
-    currencyExchange(this.prefix),
+    this.yourCurrency,
+    this.currencyExchange,
     pageRate(this.prefix, this.socket),
    ]),
   ])
@@ -24,9 +23,7 @@ export default class Currency {
   mount(this.page, this.container)
   mount(this.body, this.container)
  }
- closeSocket() {
-  window.addEventListener('popstate', function () {
-   console.log('location changed!')
-  })
+ reloadYourCurrency() {
+
  }
 }

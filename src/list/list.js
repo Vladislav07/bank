@@ -1,20 +1,8 @@
 import { el, mount, setChildren } from 'redom'
-import Choices from 'choices.js'
 import '../utils/_choises.scss'
 import './_list.scss'
-import { listOfUserAccounts, createaAccount } from '../utils/server_access'
 import getCard from '../card/card'
-import {
- Page,
- Section,
- Container,
- CustomInput,
- Group,
- FormLabel,
- SectionTitle,
- Select,
- Btn,
-} from '../base/base'
+import { Page, Container, Group, SectionTitle, Select, Btn } from '../base/base'
 
 export class ListPage {
  constructor(body_) {
@@ -40,18 +28,9 @@ export class ListPage {
 
  renderCards(data) {
   this.wrapper.innerHTML = ''
-  data.forEach((card) => {
-   mount(
-    this.wrapper,
-    getCard(
-     this.prefix,
-     card.account,
-     card.balance,
-     card.transactions.length > 0 ? card.transactions[0].date : ''
-    )
-   )
-  })
+  data.forEach((card) => this.renderCard(card))
  }
+
  renderCard(card) {
   mount(
    this.wrapper,

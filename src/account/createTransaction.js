@@ -13,7 +13,8 @@ function createTransaction(body, prefix) {
   e.preventDefault()
  })
 
- const fieldNumber = new Select('destinationAccount', `${prefix}.form`)
+ const fieldNumber = new InputChoices('destinationAccount', `${prefix}.form`)
+ //const fieldNumber = new Select('destinationAccount', `${prefix}.form`)
  const fieldAmount = new CustomInput(
   'text',
   'password',

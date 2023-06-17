@@ -1,37 +1,39 @@
-import { el, mount, list, unmount } from 'redom'
+import { el, mount, list } from 'redom'
 import './_yourCurrency.scss'
 import { Container, Section } from '../base/base'
-import { userCurrencies } from '../utils/server_access'
 
-function balanceCurrency(parent) {
- const prefix = 'cumulation'
- const sectionCurrency = new Section(prefix, parent)
- const container = new Container(prefix)
- const title = el(`h2.${prefix}__title`, `Ваши валюты`)
+export default class BalanceCurrency {
+ constructor(parent_) {
+  this.parent = parent_
+  this.prefix = 'cumulation'
+  this.sectionCurrency = new Section(this.prefix, this.parent)
+  this.container = new Container(this.prefix)
+  this.title = el(`h2.${this.prefix}__title`, `Ваши валюты`)
+  this.ul = list(`ul.${this.prefix}__list`)
 
- const ul = list(`ul.${prefix}__list`)
+  mount(this.container, this.title)
+  mount(this.container, this.ul)
+  mount(this.sectionCurrency, this.container)
+ }
 
- mount(container, title)
- mount(container, ul)
- mount(sectionCurrency, container)
- userCurrencies().then((data) => {
+ loadCurrency(data) {
+  this.ul.HTML = ''
   for (let key in data) {
-   mount(ul, rowCurrency(data[key], prefix))
-   console.log(data[key])
+   mount(this.ul, this.rowCurrency(data[key], this.prefix))
   }
- })
+ }
 
- return sectionCurrency
+ rowCurrency(data, prefix) {
+  // const record = Object.values(data)
+  const row = el(`li.${prefix}__i`, [
+   el(`span.${prefix}__name`, data.code),
+   el(`span.${prefix}__separator`, ''),
+   el(`span.${prefix}__number`, data.amount),
+  ])
+  return row
+ }
+
+ getSection() {
+  return this.sectionCurrency
+ }
 }
-
-function rowCurrency(data, prefix) {
- const record = Object.values(data)
- const row = el(`li.${prefix}__i`, [
-  el(`span.${prefix}__name`, data.code),
-  el(`span.${prefix}__separator`, ''),
-  el(`span.${prefix}__number`, data.amount),
- ])
- return row
-}
-
-export { balanceCurrency as default }

@@ -4,7 +4,7 @@ import './_exchange.scss'
 import { CustomInput, FormLabel, Btn, Group, Select } from '../base/base'
 
 function currencyExchange(prefix) {
- const form = el(`form.${prefix}__form.form`, {
+ const form = el(`form.${prefix}__form`, {
   id: `form-${prefix}`,
  })
 
@@ -12,19 +12,19 @@ function currencyExchange(prefix) {
   e.preventDefault()
  })
 
- const direct = new Group(form, [
+ const direct = new Group('form', [
   el(`span.${prefix}__direct`, 'Из'),
   new Select('from', prefix),
   el(`span.${prefix}__direct`, 'в'),
   new Select('to', prefix),
  ])
 
- const sum = new Group(form, [
+ const sum = new Group('form', [
   el(`span.${prefix}__label`, 'сумма'),
-  new CustomInput('number', 'amount', `${prefix}__input`),
+  new CustomInput('number', 'amount', `${prefix}`),
  ])
 
- const btn = new Btn('Войти', 'submit', 'form')
+ const btn = new Btn('Обменять', 'submit', 'form')
 
  setChildren(form, [
   el(`h2.${prefix}__title`, 'Обмен валюты'),

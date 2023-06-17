@@ -1,12 +1,8 @@
-import { el, mount, setChildren } from 'redom'
+import { mount } from 'redom'
 import Choices from 'choices.js'
 import '../_base.scss'
 import header from '../header/header'
 import { ListPage } from './list'
-import detailsAccount from '../account/account'
-import pageCurrency from '../currency/currency'
-import pageMap from '../map/map'
-import getBalance from '../balance/balance'
 import {
  listOfUserAccounts,
  createaAccount,
@@ -20,33 +16,22 @@ export function ListAccountsController() {
  beforeRouter()
 
  listOfUserAccounts().then((data) => {
-
- // console.log (data)
-
-
   const pageList = new ListPage(body)
   pageList.renderCards(data)
-  window.onload = function () {
-   loadResourses(
-    'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'
-   ).then(() => {
-    SetSelect(data, pageList)
-   })
 
-   const btn = document.querySelector('.register__btn')
-   btn.addEventListener('click', () => {
-    createaAccount().then((data) => {
-     pageList.renderCard(data.payload)
-    })
+  loadResourses(
+   'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'
+  ).then(() => {
+   SetSelect(data, pageList)
+  })
+
+  const btn = document.querySelector('.register__btn')
+  btn.addEventListener('click', () => {
+   createaAccount().then((data) => {
+    pageList.renderCard(data.payload)
    })
-  }
+  })
  })
-}
-
-const render = (content) => {
- clear()
- beforeRouter()
- mount(body, content)
 }
 
 function beforeRouter(isView = true) {
@@ -78,7 +63,6 @@ function SetSelect(data, pageList) {
 
  select.passedElement.element.addEventListener('change', (value) => {
   const arrAccount = Sorting(data, value.detail.value)
-  //console.log(arrAccount);
   pageList.renderCards(arrAccount)
  })
 
@@ -87,8 +71,4 @@ function SetSelect(data, pageList) {
    dir ? a[prop] < b[prop] : a[prop] > b[prop] ? 1 : -1
   )
  }
-
- // select.passedElement.element.addEventListener("change", (value) => {
- //   console.log(value);
- // });
 }

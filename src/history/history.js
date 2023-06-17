@@ -14,8 +14,13 @@ function getHistory(transactions, body, parent) {
  mount(container, new TitleSection('История переводов', prefix))
  mount(container, tag)
  mount(section, container)
- mount(body, section)
+
  tabulator(transactions.slice(1, 5), tag)
+ if (body === null) {
+  return section
+ } else {
+  mount(body, section)
+ }
 }
 
 export { getHistory as default }

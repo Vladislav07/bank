@@ -3,23 +3,14 @@ import history from '../history/history'
 import './_account.scss'
 import '../utils/_chart.scss'
 import createTransaction from './createTransaction'
-import { accountDetails, loadResourses } from '../utils/server_access'
 import { drawChart } from '../utils/charts'
-import { SortDataTransaction } from '../utils/charts'
-import { GoogleCharts } from '../utils/googleCharts.esm'
-import router from '../index'
-import tabulator from '../table/tabulator'
 
 import {
  Page,
  Section,
  Container,
- CustomInput,
  Group,
- FormLabel,
  SectionTitle,
- Select,
- Btn,
  Link,
  TitleSection,
 } from '../base/base'
@@ -57,9 +48,9 @@ export default class AccountPage {
    drawChart(balanceUser, this.tag)
   }, 500)
 
-  mount(this.accountPage, this.container)
-  mount(this.body, this.container)
-  createTransaction(this.container, this.prefix),
+   mount(this.accountPage, this.container)
+   mount(this.body, this.container)
+   createTransaction(this.container, this.prefix),
    history(transactions.slice(1, 5), this.container, this.prefix)
  }
 }
