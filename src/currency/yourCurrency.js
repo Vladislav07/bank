@@ -1,4 +1,4 @@
-import { el, mount, list } from 'redom'
+import { el, mount, list, unmount } from 'redom'
 import './_yourCurrency.scss'
 import { Container, Section } from '../base/base'
 
@@ -17,14 +17,17 @@ export default class BalanceCurrency {
  }
 
  loadCurrency(data) {
-  this.ul.HTML = ''
+  this.ul.innerHTML = ''
+  const innerUl = document.querySelectorAll('.cumulation__i')
+  innerUl.forEach(li=>{
+    unmount(this.ul, li)
+  })
   for (let key in data) {
    mount(this.ul, this.rowCurrency(data[key], this.prefix))
   }
  }
 
  rowCurrency(data, prefix) {
-  // const record = Object.values(data)
   const row = el(`li.${prefix}__i`, [
    el(`span.${prefix}__name`, data.code),
    el(`span.${prefix}__separator`, ''),

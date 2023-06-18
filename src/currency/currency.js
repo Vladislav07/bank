@@ -1,6 +1,7 @@
 import { mount, setChildren } from 'redom'
 import './_currency.scss'
 import pageRate from './courseChanges'
+import currencyExchange from './currencyExchange'
 import { Page, Container, Group, SectionTitle } from '../base/base'
 
 export default class Currency {
@@ -15,7 +16,7 @@ export default class Currency {
    new SectionTitle('Валютный обмен', this.prefix),
    new Group(this.prefix, [
     this.yourCurrency,
-    this.currencyExchange,
+    currencyExchange('exchange'),
     pageRate(this.prefix, this.socket),
    ]),
   ])

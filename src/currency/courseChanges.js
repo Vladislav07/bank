@@ -27,11 +27,13 @@ function courseChanges(parent, socket) {
    unmount(ul, firstEl)
   }
  }
+//  setTimeout(() => {
+//   const h = document.querySelector('.cumulation__list').clientHeight
+//   console.log(h)
+//  }, 1000)
 
- setTimeout(() => {
-  const h = document.querySelector('.rate__list').of
-  console.log(h)
- }, 1000)
+console.log(ul.clientHeight)
+
  return sectionRate
 }
 
