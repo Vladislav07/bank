@@ -7,10 +7,10 @@ import {
  userCurrencies,
  webSocketStrim,
 } from './server_access.js'
+import currency from 'currency.js'
 
-import './index.scss'
 
-console.log('start')
+
 
 // authorizationRequest().then((token) => {
 //   listOfUserAccounts(token).then((id) => {
@@ -65,6 +65,28 @@ export function SortDataTransaction(trans, amount, account) {
     yearLastTrans = new Date(trans.date).getYear() - 100
    }
   })
-  console.log(dataChart)
+  console.log(...dataChart)
   return dataChart
  }
+
+ function isOut(transaction, account) {
+  if (account === transaction) {
+   return true
+  }
+  return false
+ }
+
+ const months = [
+  'Январь',
+  'февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'июнь',
+  'июль',
+  'август',
+  'сентябрь',
+  'октябрь',
+  'ноябрь',
+  'декабрь',
+ ]

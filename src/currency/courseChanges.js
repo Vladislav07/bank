@@ -6,33 +6,33 @@ import bottom from '../assets/images/Vector_bottom.svg'
 
 function courseChanges(parent, socket) {
  const prefix = 'rate'
- const countStrok = 10
+
  const sectionRate = new Section(prefix, parent)
  const container = new Container(prefix)
  const title = el(`h2.${prefix}__title`, `Изменение курсов в реальном времени`)
  const ul = list(`ul.${prefix}__list`)
  let l = 0
+ let h = 5
  mount(container, title)
  mount(container, ul)
  mount(sectionRate, container)
-
+ setTimeout(() => {
+  if (document.querySelector('#rate')) {
+  h = Math.ceil((document.querySelector('#rate').clientHeight -150) / 50)
+  console.log(h)
+  }
+ }, 1000)
  socket.onmessage = function (event) {
   const record = JSON.parse(event.data)
   const recordElement = rowRate(record, prefix)
 
   mount(ul, recordElement)
   l += 1
-  if (l > 11) {
+  if (l > h) {
    const firstEl = document.querySelector(`.${prefix}__item`)
    unmount(ul, firstEl)
   }
  }
-//  setTimeout(() => {
-//   const h = document.querySelector('.cumulation__list').clientHeight
-//   console.log(h)
-//  }, 1000)
-
-console.log(ul.clientHeight)
 
  return sectionRate
 }

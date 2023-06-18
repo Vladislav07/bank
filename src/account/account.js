@@ -43,14 +43,15 @@ export default class AccountPage {
 
    this.sectionChart,
   ])
-
+  const countPeriod = balanceUser.length
+  console.log(countPeriod)
   setTimeout(() => {
-   drawChart(balanceUser, this.tag)
+   drawChart(balanceUser.slice(1, 6), this.tag)
   }, 500)
 
-   mount(this.accountPage, this.container)
-   mount(this.body, this.container)
-   createTransaction(this.container, this.prefix),
-   history(transactions.slice(1, 5), this.container, this.prefix)
+  mount(this.accountPage, this.container)
+  mount(this.body, this.container)
+  createTransaction(this.container, this.prefix),
+   history(transactions, this.container, this.prefix)
  }
 }

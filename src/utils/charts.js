@@ -1,7 +1,5 @@
 import { GoogleCharts } from './googleCharts.esm'
 
-import currency from 'currency.js'
-import { mount } from 'redom'
 
 GoogleCharts.load(drawChart)
 
@@ -83,50 +81,7 @@ function GetDataWithAccumulation(balanceUser) {
    monthlySummary.push(temp)
   }
  }
-
  return monthlySummary
-}
-
-export function SortDataTransaction(trans, amount, account) {
- const transaction = trans.reverse()
- console.log(transaction)
- let currentBalance = amount
-
- let mongthLastTrans = new Date(transaction[0].date).getMonth()
- const dataChart = []
- let outgo = 0
- let receipt = 0
- transaction.forEach((trans) => {
-  if (new Date(trans.date).getMonth() === mongthLastTrans) {
-   if (isOut(trans.from, account)) {
-    outgo = currency(outgo).add(trans.amount).value
-   } else {
-    receipt = currency(receipt).add(trans.amount).value
-   }
-  } else {
-   currentBalance = currency(currentBalance).add(receipt).subtract(outgo).value
-
-   const temp = {
-    mongtn: months[mongthLastTrans - 1],
-    out: outgo,
-    in: receipt,
-    balance: currentBalance,
-   }
-
-   dataChart.push(temp)
-   outgo = 0
-   receipt = 0
-   mongthLastTrans = new Date(trans.date).getMonth()
-  }
- })
- return dataChart
-}
-
-function isOut(transaction, account) {
- if (account === transaction) {
-  return true
- }
- return false
 }
 
 function dataChart(monthlySummary) {
@@ -146,17 +101,4 @@ function WithAccum(Summary) {
  return data
 }
 
-const months = [
- 'Январь',
- 'февраль',
- 'Март',
- 'Апрель',
- 'Май',
- 'июнь',
- 'июль',
- 'август',
- 'сентябрь',
- 'октябрь',
- 'ноябрь',
- 'декабрь',
-]
+

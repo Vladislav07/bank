@@ -2,7 +2,7 @@ import { el, mount, setChildren } from 'redom'
 import './_balance.scss'
 import { accountDetails } from '../utils/server_access'
 import { drawChart } from '../utils/charts'
-import { SortDataTransaction } from '../utils/charts'
+import { SortDataTransaction } from '../utils/utils'
 import history from '../history/history'
 
 import {
