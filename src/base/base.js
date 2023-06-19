@@ -92,6 +92,31 @@ export class InputChoices {
  }
 }
 
+export class InputNumber{
+  constructor(name, className){
+    this.el = el(`input.${className}__input.form__input.form-control`, {
+      list: name,
+      id:`${name}-number`,
+      type: 'number'
+    })
+  }
+}
+
+export class option {
+  constructor(item){
+    this.el=el(`option`, value = item)
+  }
+}
+
+export class DataList{
+  constructor(name, className){
+    this.el = el(`datalist.${className}__list`, {
+      id:name,
+      maxlength:4
+    })
+  }
+}
+
 export class Btn {
  constructor(text, type, className, classNameExtra) {
   this.el = el(

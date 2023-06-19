@@ -47,15 +47,42 @@
  //   grid-column: 2;
  // }
 
- .choices {
+ .account__out__group{
   grid-row: 2;
   grid-column: 2;
+  font-size: 16px;
+   position: relative;
+ }
+
+ .account__input.form__input.form-control{
+  position: relative;
+ }
+
+ .account__list{
+  position:absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
  }
 
  &__group:nth-child(5) {
   grid-row: 3;
   grid-column: 2;
  }
+ 
+ datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+datalist option:hover, datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
+}
 
  &__input {
   width: 300px;

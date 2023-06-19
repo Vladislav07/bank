@@ -31,9 +31,10 @@ export default function AccountController(number) {
    }
   }
   loadResourses(
-   'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css'
+   'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
   )
-  SetSelect(data.account)
+ // SetSelect(data.account)
+ LoadDataList(data.account)
   const chart = document.querySelector('#chart')
   chart.addEventListener('click', (e) => {
    e.preventDefault()
@@ -42,7 +43,14 @@ export default function AccountController(number) {
  })
 }
 
-
+function LoadDataList(key) {
+  const storageAccounts = JSON.parse(localStorage.getItem(key)).it
+  console.log(storageAccounts )
+  const dataList = document.querySelector('#to')
+  storageAccounts .forEach(value=>{
+    dataList.appendChild(new Option(value))
+  })
+}
 
 function TransformationTrans(trans) {
  const transaction = []

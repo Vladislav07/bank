@@ -51,6 +51,7 @@
   "@types/google.visualization": "0.0.69",
   "choices.js": "^10.2.0",
   "currency.js": "^2.0.4",
+  "datalist-polyfill": "^1.25.1",
   "google-charts": "^2.0.0",
   "google-maps": "^4.3.3",
   "imask": "^6.6.0",
