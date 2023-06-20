@@ -108,8 +108,29 @@ export async function createaAccount() {
  }
 }
 
-export async function fundsTransfer(token, transfer) {
- //Метод перевода средств со счёта на счёт.
+export async function fundsTransfer(transfer) {
+  try {
+    console.log('createaAccount')
+    const res = await fetch('http://localhost:3000/transfer-funds', {
+     method: 'POST',
+     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${sessionStorage.getItem('key')}`,
+     },
+     body: JSON.stringify(transfer),
+    })
+    if (res.ok == true) {
+     const data = await res.json()
+     if (data.error) {
+      throw new Error(data.error)
+     } else {
+      console.log(data)
+      return data
+     }
+    }
+   } catch (error) {
+    console.log(error.message)
+   }
 }
 
 export async function allCurrencies() {

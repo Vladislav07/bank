@@ -1,10 +1,8 @@
-import Choices from 'choices.js'
 import '../_base.scss'
 import AccountPage from './account'
 import router from '../index'
-import { el } from 'redom'
 import { SortDataTransaction } from '../utils/utils'
-import { accountDetails, loadResourses } from '../utils/server_access'
+import { accountDetails, fundsTransfer } from '../utils/server_access'
 
 const body = document.querySelector('#root')
 
