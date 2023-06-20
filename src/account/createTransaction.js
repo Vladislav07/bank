@@ -21,9 +21,9 @@ function createTransaction(body, prefix) {
   `${prefix}__input.form`
  )
 
-const inputNumber = new InputNumber('to', prefix)
+const inputNumber = new InputNumber('browsers', prefix)
 
-const datalist = new DataList('to', prefix)
+const datalist = new DataList('browsers', prefix)
 
 const fieldNumber = new Group(`${prefix}__out`, [inputNumber, datalist])
 
@@ -37,7 +37,7 @@ const fieldNumber = new Group(`${prefix}__out`, [inputNumber, datalist])
   `${prefix}__label.form__label`
  )
 
- const btn = new Btn('Войти', 'submit', 'form')
+ const btn = new Btn('Отправить', 'submit', 'form')
 
  setChildren(form, [
   el(`h2.${prefix}__title`, 'Отправить'),

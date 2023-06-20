@@ -2,8 +2,8 @@ import Choices from 'choices.js'
 import '../_base.scss'
 import AccountPage from './account'
 import router from '../index'
-import {el} from 'redom'
-import {SortDataTransaction} from '../utils/utils'
+import { el } from 'redom'
+import { SortDataTransaction } from '../utils/utils'
 import { accountDetails, loadResourses } from '../utils/server_access'
 
 const body = document.querySelector('#root')
@@ -30,11 +30,8 @@ export default function AccountController(number) {
     getListTransferAccounts(data.transactions, data.account)
    }
   }
-  loadResourses(
-   'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
-  )
- // SetSelect(data.account)
- LoadDataList(data.account)
+
+  LoadDataList(data.account)
   const chart = document.querySelector('#chart')
   chart.addEventListener('click', (e) => {
    e.preventDefault()
@@ -44,12 +41,8 @@ export default function AccountController(number) {
 }
 
 function LoadDataList(key) {
-  const storageAccounts = JSON.parse(localStorage.getItem(key)).it
-  console.log(storageAccounts )
-  const dataList = document.querySelector('#to')
-  storageAccounts .forEach(value=>{
-    dataList.appendChild(new Option(value))
-  })
+ const storageAccounts = JSON.parse(localStorage.getItem(key)).it
+ SearchOption(storageAccounts)
 }
 
 function TransformationTrans(trans) {
@@ -68,66 +61,6 @@ function TransformationTrans(trans) {
  return transaction
 }
 
-function SetSelect(key) {
- const elem = document.getElementById('destinationAccount')
- const storageAccounts = JSON.parse(localStorage.getItem(key)).it
- const choices = new Choices(elem, {
-  noChoicesText: '',
-  maxItemCount: 1,
-  searchPlaceholderValue: 'Начните вводить номер счета',
-  itemSelectText: '',
-  addItemFilter: /[0-9]*/,
-  searchPlaceholderValue: true,
-  maxItemText: (maxItemCount) => {
-   return `Only ${maxItemCount} values can be added`
-  },
-  addItemText: (value) => {
-  // addOptionsToSelect(value)
-   // choices.itemList.append(el('option',value))
-   // choices.choiceList.append(el('option',value))
-  },
- })
-
- //choices.setValue(['pppp','1111'])
-
- const l= document.querySelector('.choices__list.choices__list--dropdown')
- l.append(el('option','value'))
- l.append(el('option','value'))
- l.append(el('option','value'))
-
-
- function add(params) {
-  choices.appendValue(params)
- }
-
- function addOptionsToSelect(searchStr) {
-  const arr = findMatches(searchStr, storageAccounts)
-  choices.clearChoices()
-  choices.clearStore()
-  choices.setValue(arr)
- }
-
- choices.passedElement.element.addEventListener('addItem', (value) => {
-  //
- })
-
- function findMatches(search, options) {
-  return options.filter((option) => {
-   const regex = new RegExp(`^${search}`, 'gi')
-   return option.match(regex)
-  })
- }
-}
-
-function symbolIsNumber(symbol) {
- console.log(symbol.charCodeAt(0))
- if (symbol.charCodeAt(0) < 48 || symbol.charCodeAt(0) > 57) {
-  return false
- } else {
-  return true
- }
-}
-
 function getListTransferAccounts(transList, account) {
  const list = []
  let temp = ''
@@ -142,4 +75,43 @@ function getListTransferAccounts(transList, account) {
   }
  })
  localStorage.setItem(account, JSON.stringify({ it: list }))
+}
+
+function SearchOption(storageAccounts) {
+ const input = document.querySelector('#input')
+ const dataList = document.querySelector('#browsers')
+ let options = []
+ if (input) {
+  input.addEventListener('input', (e) => {
+   e.preventDefault()
+   const outValue = input.value
+   if (outValue === '') {
+    dataList.innerHTML = ''
+    dataList.style.display = 'none'
+    return
+   }
+   if (outValue.length > 26) {
+    input.value = outValue.slice(0, 25)
+    return
+   }
+
+   options = findMatches(input.value, storageAccounts)
+   dataList.innerHTML = ''
+   options.forEach((value) => {
+    const option = new Option(value)
+    dataList.appendChild(option)
+    option.addEventListener('click', (e) => {
+     input.value = option.value
+     dataList.style.display = 'none'
+    })
+   })
+   dataList.style.display = 'block'
+  })
+ }
+}
+function findMatches(search, options) {
+ return options.filter((option) => {
+  const regex = new RegExp(`^${search}`, 'gi')
+  return option.match(regex)
+ })
 }

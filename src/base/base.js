@@ -92,29 +92,36 @@ export class InputChoices {
  }
 }
 
-export class InputNumber{
-  constructor(name, className){
-    this.el = el(`input.${className}__input.form__input.form-control`, {
-      list: name,
-      id:`${name}-number`,
-      type: 'number'
-    })
-  }
+export class InputNumber {
+ constructor(name, className) {
+  this.el = el(`input.${className}__input.form__input.form-control`, {
+   name: name,
+   role: 'combobox',
+   id: `input`,
+   list: '',
+   type: 'number',
+   placeholder: 'Enter account number',
+   autocomplete: 'off',
+   min:'0',
+   max:'99999999999999999999999999'
+  })
+ }
 }
 
 export class option {
-  constructor(item){
-    this.el=el(`option`, value = item)
-  }
+ constructor(item) {
+  this.el = el(`option`, (value = item))
+ }
 }
 
-export class DataList{
-  constructor(name, className){
-    this.el = el(`datalist.${className}__list`, {
-      id:name,
-      maxlength:4
-    })
-  }
+export class DataList {
+ constructor(name, className) {
+  this.el = el(`datalist.${className}__list`, {
+   id: name,
+   maxlength: 4,
+   role: 'listbox',
+  })
+ }
 }
 
 export class Btn {

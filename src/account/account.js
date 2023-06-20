@@ -43,6 +43,7 @@ export default class AccountPage {
 
    this.sectionChart,
   ])
+  
   const countPeriod = balanceUser.length
   console.log(countPeriod)
   setTimeout(() => {
