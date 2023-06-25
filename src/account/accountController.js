@@ -2,7 +2,7 @@ import '../_base.scss'
 import AccountPage from './account'
 import router from '../index'
 import { SortDataTransaction } from '../utils/utils'
-import { accountDetails, fundsTransfer } from '../utils/server_access'
+import { accountDetails, fundsTransfer, listOfUserAccounts } from '../utils/server_access'
 
 const body = document.querySelector('#root')
 
@@ -22,7 +22,8 @@ export default function AccountController(number) {
     data.account,
     data.balance,
     TransformationTrans(data.transactions),
-    formatDate
+    formatDate,
+    moneyTransferOperation
    )
    if (!localStorage[data.account]) {
     getListTransferAccounts(data.transactions, data.account)
@@ -36,6 +37,11 @@ export default function AccountController(number) {
    router.navigate(`balance/${number}`)
   })
  })
+function moneyTransferOperation(to, amount) {
+  const res = fundsTransfer({from:number, to:to, amount:amount})
+  console.log(res)
+}
+
 }
 
 function LoadDataList(key) {
@@ -113,3 +119,5 @@ function findMatches(search, options) {
   return option.match(regex)
  })
 }
+
+

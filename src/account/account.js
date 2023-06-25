@@ -29,7 +29,7 @@ export default class AccountPage {
   setChildren(this.sectionChart, [this.titleChart, this.tag])
  }
 
- renderBody(number, balance, transactions, balanceUser) {
+ renderBody(number, balance, transactions, balanceUser,  moneyTransferOperation) {
   setChildren(this.container, [
    new Group(this.prefix, [
     new SectionTitle('Просмотр счета', this.prefix),
@@ -43,7 +43,7 @@ export default class AccountPage {
 
    this.sectionChart,
   ])
-  
+
   const countPeriod = balanceUser.length
   console.log(countPeriod)
   setTimeout(() => {
@@ -52,7 +52,7 @@ export default class AccountPage {
 
   mount(this.accountPage, this.container)
   mount(this.body, this.container)
-  createTransaction(this.container, this.prefix),
+  createTransaction(this.container, this.prefix, moneyTransferOperation),
    history(transactions, this.container, this.prefix)
  }
 }

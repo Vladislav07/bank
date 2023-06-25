@@ -2,22 +2,28 @@ import { el, mount, setChildren } from 'redom'
 import './_form.scss'
 import './_account.scss'
 
-import { CustomInput, FormLabel, Btn, Select, InputChoices, InputNumber, DataList, Group } from '../base/base'
+import { CustomInput, FormLabel, Btn, InputNumber, DataList, Group } from '../base/base'
 
-function createTransaction(body, prefix) {
+function createTransaction(body, prefix,  moneyTransferOperation) {
  const form = el(`form.${prefix}__form.form`, {
   id: `form-${prefix}`,
  })
 
  form.addEventListener('submit', (e) => {
   e.preventDefault()
+  const data = new FormData(form)
+
+  const  toAccount= data.get('browsers')
+  const amountTransfer =  data.get('amountOfMoney')
+
+  moneyTransferOperation(toAccount, amountTransfer)
+  //console.log(dataForTransfer)
  })
 
-// const fieldNumber = new InputChoices('destinationAccount', `${prefix}.form`)
- //const fieldNumber = new Select('destinationAccount', `${prefix}.form`)
+
  const fieldAmount = new CustomInput(
   'text',
-  'password',
+  'amountOfMoney',
   `${prefix}__input.form`
  )
 
