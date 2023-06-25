@@ -1,8 +1,8 @@
 import { el, mount, setChildren } from 'redom'
-import history from '../history/history'
+import History from '../history/history'
 import './_account.scss'
 import '../utils/_chart.scss'
-import createTransaction from './createTransaction'
+import Transaction from './createTransaction'
 import { drawChart } from '../utils/charts'
 
 import {
@@ -23,13 +23,16 @@ export default class AccountPage {
   this.container = new Container(this.prefix)
   this.sectionChart = new Section('chart', this.prefix)
   this.titleChart = new TitleSection('Динамика баланса', 'chart')
+  //this.moneyTransferOperation = moneyTransferOperation_
   this.tag = el(`.chart__balance`, {
    id: 'chart',
   })
   setChildren(this.sectionChart, [this.titleChart, this.tag])
+  this.history = new History(this.container, this.prefix)
+  this.transactionForm = new Transaction(this.container, this.prefix. this.moneyTransferOperation)
  }
 
- renderBody(number, balance, transactions, balanceUser,  moneyTransferOperation) {
+ renderBody(number, balance, balanceUser) {
   setChildren(this.container, [
    new Group(this.prefix, [
     new SectionTitle('Просмотр счета', this.prefix),
@@ -51,8 +54,13 @@ export default class AccountPage {
   }, 500)
 
   mount(this.accountPage, this.container)
+  mount(this.container,  this.transactionForm)
   mount(this.body, this.container)
-  createTransaction(this.container, this.prefix, moneyTransferOperation),
-   history(transactions, this.container, this.prefix)
+
+ // createTransaction(this.container, this.prefix, moneyTransferOperation)
+ }
+
+  LoadTableHistory(transactions) {
+  this.history.LoadTable(transactions)
  }
 }

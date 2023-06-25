@@ -2,13 +2,13 @@ import '../_base.scss'
 import AccountPage from './account'
 import router from '../index'
 import { SortDataTransaction } from '../utils/utils'
-import { accountDetails, fundsTransfer, listOfUserAccounts } from '../utils/server_access'
+
+import { accountDetails, fundsTransfer } from '../utils/server_access'
 
 const body = document.querySelector('#root')
 
 export default function AccountController(number) {
  const page = new AccountPage(body)
-
  accountDetails(number).then((data) => {
   if (data.transactions.length === 0) {
    page.renderBody(data.account, 0, [], [])
@@ -21,13 +21,10 @@ export default function AccountController(number) {
    page.renderBody(
     data.account,
     data.balance,
-    TransformationTrans(data.transactions),
-    formatDate,
-    moneyTransferOperation
+    formatDate
    )
-   if (!localStorage[data.account]) {
-    getListTransferAccounts(data.transactions, data.account)
-   }
+   getListTransferAccounts(data.transactions, data.account)
+   page.LoadTableHistory(TransformationTrans(data.transactions))
   }
 
   LoadDataList(data.account)
@@ -37,11 +34,15 @@ export default function AccountController(number) {
    router.navigate(`balance/${number}`)
   })
  })
-function moneyTransferOperation(to, amount) {
-  const res = fundsTransfer({from:number, to:to, amount:amount})
-  console.log(res)
-}
 
+ function moneyTransferOperation(to, amount) {
+  fundsTransfer({ from: number, to: to, amount: amount }).then((res) => {
+   if (res.error === '') {
+    UpdateDataList(to, res.payload.account)
+    page.LoadTableHistory(TransformationTrans(res.payload.transactions))
+   }
+  })
+ }
 }
 
 function LoadDataList(key) {
@@ -120,4 +121,12 @@ function findMatches(search, options) {
  })
 }
 
-
+function UpdateDataList(value, key) {
+ const dataList = document.querySelector('#browsers')
+ const option = new Option(value)
+ dataList.appendChild(option)
+ const storageAccounts = JSON.parse(localStorage.getItem(key)).it
+ if(storageAccounts.includes(value)) return;
+ storageAccounts.push(value)
+ localStorage.setItem(key, JSON.stringify({ it: storageAccounts }))
+}
