@@ -41,7 +41,8 @@ export default class History {
 
  LoadTable(transactions) {
   this.body.innerHTML=''
-  tabulator(transactions.slice(1, 10), this.tag)
+  const Records = transactions.slice(0, 10)
+  tabulator(Records, this.tag)
   mount(this.body, this.section)
  }
 }

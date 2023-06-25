@@ -8,7 +8,7 @@ import { accountDetails, fundsTransfer } from '../utils/server_access'
 const body = document.querySelector('#root')
 
 export default function AccountController(number) {
- const page = new AccountPage(body)
+ const page = new AccountPage(body, moneyTransferOperation)
  accountDetails(number).then((data) => {
   if (data.transactions.length === 0) {
    page.renderBody(data.account, 0, [], [])
@@ -18,11 +18,8 @@ export default function AccountController(number) {
     data.balance,
     data.account
    )
-   page.renderBody(
-    data.account,
-    data.balance,
-    formatDate
-   )
+
+   page.renderBody(data.account, data.balance, formatDate)
    getListTransferAccounts(data.transactions, data.account)
    page.LoadTableHistory(TransformationTrans(data.transactions))
   }
@@ -126,7 +123,7 @@ function UpdateDataList(value, key) {
  const option = new Option(value)
  dataList.appendChild(option)
  const storageAccounts = JSON.parse(localStorage.getItem(key)).it
- if(storageAccounts.includes(value)) return;
+ if (storageAccounts.includes(value)) return
  storageAccounts.push(value)
  localStorage.setItem(key, JSON.stringify({ it: storageAccounts }))
 }

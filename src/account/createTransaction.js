@@ -63,10 +63,10 @@ function createTransaction(body, prefix, moneyTransferOperation) {
 //export { createTransaction as default }
 
 export default class Transaction {
- constructor(bodyOut, prefixOut) {
+ constructor(bodyOut, prefixOut, moneyTransferOperation_) {
   this.body = bodyOut
   this.prefix = prefixOut
- // this.moneyTransferOperation = moneyTransferOperation_
+  this.moneyTransferOperation = moneyTransferOperation_
   this.form = el(`form.${this.prefix}__form.form`, {
    id: `form-${this.prefix}`,
   })
@@ -108,7 +108,7 @@ export default class Transaction {
    const data = new FormData(this.form)
    const toAccount = data.get('browsers')
    const amountTransfer = data.get('amountOfMoney')
-  //this.moneyTransferOperation(toAccount, amountTransfer)
+  this.moneyTransferOperation(toAccount, amountTransfer)
   })
 
   return this.form

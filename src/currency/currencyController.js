@@ -45,7 +45,6 @@ export default function currencyController() {
     amount: data.get('amount'),
    }
    currencyBuy(operationExchange).then((resultExchange) => {
-    console.log(resultExchange)
     balance.loadCurrency(resultExchange)
    })
   })

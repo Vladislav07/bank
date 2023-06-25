@@ -19,7 +19,6 @@ function courseChanges(parent, socket) {
  setTimeout(() => {
   if (document.querySelector('#rate')) {
   h = Math.ceil((document.querySelector('#rate').clientHeight -150) / 50)
-  console.log(h)
   }
  }, 1000)
  socket.onmessage = function (event) {

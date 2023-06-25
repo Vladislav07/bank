@@ -1,6 +1,5 @@
 import { GoogleCharts } from './googleCharts.esm'
 
-
 GoogleCharts.load(drawChart)
 
 const optionsSimple = {
@@ -100,5 +99,3 @@ function WithAccum(Summary) {
  ])
  return data
 }
-
-

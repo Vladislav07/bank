@@ -16,20 +16,20 @@ import {
 } from '../base/base'
 
 export default class AccountPage {
- constructor(body_) {
+ constructor(body_, moneyTransferOperation_) {
   this.prefix = 'account'
   this.body = body_
   this.accountPage = new Page(this.prefix)
   this.container = new Container(this.prefix)
   this.sectionChart = new Section('chart', this.prefix)
   this.titleChart = new TitleSection('Динамика баланса', 'chart')
-  //this.moneyTransferOperation = moneyTransferOperation_
+  this.moneyTransferOperation = moneyTransferOperation_
   this.tag = el(`.chart__balance`, {
    id: 'chart',
   })
   setChildren(this.sectionChart, [this.titleChart, this.tag])
   this.history = new History(this.container, this.prefix)
-  this.transactionForm = new Transaction(this.container, this.prefix. this.moneyTransferOperation)
+  this.transactionForm = new Transaction(this.container, this.prefix, this.moneyTransferOperation)
  }
 
  renderBody(number, balance, balanceUser) {
@@ -47,11 +47,9 @@ export default class AccountPage {
    this.sectionChart,
   ])
 
-  const countPeriod = balanceUser.length
-  console.log(countPeriod)
   setTimeout(() => {
-   drawChart(balanceUser.slice(1, 6), this.tag)
-  }, 500)
+   drawChart(balanceUser, this.tag)
+  }, 1500)
 
   mount(this.accountPage, this.container)
   mount(this.container,  this.transactionForm)
