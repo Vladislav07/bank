@@ -10,6 +10,7 @@ const body = document.querySelector('#root')
 export default function AccountController(number) {
  const page = new AccountPage(body, moneyTransferOperation)
  accountDetails(number).then((data) => {
+  console.log(data)
   if (data.transactions.length === 0) {
    page.renderBody(data.account, 0, [], [])
   } else {
