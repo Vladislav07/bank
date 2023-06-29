@@ -1,19 +1,56 @@
 import { SortDataTransaction } from './utils';
 
 describe('SortDataTransaction', () => {
-  const mockTransactionData = [
-    { date: '2021-01-16T12:00:00.000Z', from: 'A', amount: 50 },
-    { date: '2021-02-17T12:00:00.000Z', from: 'B', amount: 30 },
-    { date: '2021-02-20T12:00:00.000Z', from: 'C', amount: 20 },
-    { date: '2021-03-15T12:00:00.000Z', from: 'D', amount: 10 },
-  ];
+  const mockTransactionData = {
+    account: '37822288873870181035846031',
+    balance: 2936.5,
+    mine: true,
+    transactions: [
+     {
+      amount: 0.5,
+      date: '2023-06-25T13:28:03.344Z',
+      from: '37822288873870181035846030',
+      to: '74213041477477406320783754',
+     },
+     {
+      amount: 66,
+      date: '2023-05-25T13:21:06.156Z',
+      from: '37822288873870181035846030',
+      to: '36246277668464257432003354',
+     },
+     {
+      amount: 5222,
+      date: '2023-04-20T08:27:01.077Z',
+      from: '74213041477477406320783754',
+      to: '37822288873870181035846030',
+     },
+     {
+     amount: 122,
+     date: '2023-04-25T13:28:03.344Z',
+     from: '37822288873870181035846030',
+     to: '74213041477477406320783754',
+    },
+    {
+     amount: 6610,
+     date: '2023-04-25T13:21:06.156Z',
+     from: '37822288873870181035846030',
+     to: '36246277668464257432003354',
+    },
+    {
+     amount: 552,
+     date: '2023-03-25T08:27:01.077Z',
+     from: '74213041477477406320783754',
+     to: '37822288873870181035846030',
+    }
+    ]
+   }
 
   describe('when called with transaction data, amount, and account', () => {
-    const amount = 100;
-    const account = 'A';
+    const amount = mockTransactionData.balance;
+    const account = mockTransactionData.account;
 
     it('should return an array of objects with the correct properties', () => {
-      const result = SortDataTransaction(mockTransactionData, amount, account);
+      const result = SortDataTransaction(mockTransactionData.transactions, amount, account);
 
       expect(Array.isArray(result)).toBe(true);
 

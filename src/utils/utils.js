@@ -25,7 +25,7 @@ import currency from 'currency.js'
 //  webSocketStrim()
 
 export function SortDataTransaction(transOut, amount, account) {
- const transaction = transOut.reverse()
+ const transaction = transOut
 
  let currentBalance = amount
 
@@ -36,6 +36,7 @@ export function SortDataTransaction(transOut, amount, account) {
  let receipt = 0
  const count = transaction.length
  let counter = 1
+ let temp = null
  transaction.forEach((trans) => {
   counter += 1
   if (
@@ -48,7 +49,7 @@ export function SortDataTransaction(transOut, amount, account) {
     receipt = currency(receipt).add(trans.amount).value
    }
   } else {
-   const temp = {
+   temp = {
     mongtn: months[mongthLastTrans],
     year: yearLastTrans,
     out: outgo,
@@ -56,10 +57,7 @@ export function SortDataTransaction(transOut, amount, account) {
     balance: currentBalance,
    }
    dataChart.push(temp)
-  //  if (EqualDate(startDate, new Date(trans.date))) {
-  //   return dataChart
-  //  }
-   currentBalance = currency(currentBalance).add(receipt).subtract(outgo).value
+   currentBalance = currency(currentBalance).add(outgo).subtract(receipt).value
    outgo = 0
    receipt = 0
    mongthLastTrans = new Date(trans.date).getMonth()
@@ -67,7 +65,7 @@ export function SortDataTransaction(transOut, amount, account) {
   }
 
   if (count < counter) {
-   const temp = {
+   temp = {
     mongtn: months[mongthLastTrans],
     year: yearLastTrans,
     out: outgo,
@@ -76,9 +74,21 @@ export function SortDataTransaction(transOut, amount, account) {
    }
    dataChart.push(temp)
   }
+  if (dataChart.length === 1) {
+   currentBalance = currency(currentBalance).add(outgo).subtract(receipt).value
+   dataChart.push({
+    mongtn: months[mongthLastTrans - 1],
+    year: yearLastTrans,
+    out: 0,
+    in: 0,
+    balance: currentBalance,
+   })
+  }
  })
- //console.log(...dataChart)
- return dataChart
+
+ console.log(returnDataLastSixMonths(dataChart))
+
+ return returnDataLastSixMonths(dataChart)
 }
 
 function isOut(transaction, account) {
@@ -112,57 +122,60 @@ function EqualDate(one, second) {
 }
 
 function getSixMonthsAgo() {
-  var today = new Date();
-  var month = today.getMonth();
-  var year = today.getFullYear();
+ var today = new Date()
+ var month = today.getMonth()
+ var year = today.getFullYear()
 
-  month -= 6;
-  if (month < 0) {
-    month += 12;
-    year--;
-  }
+ month -= 6
+ if (month < 0) {
+  month += 12
+  year--
+ }
 
-  return (month + 1) + '/' + year;
+ return month + 1 + '/' + year
 }
 
 function getMonthNames() {
-  // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth();
-  const startingMonth = (currentMonth + 12 - 6) % 12;
-  const monthNames = [];
+ // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+ const currentDate = new Date()
+ const currentMonth = currentDate.getMonth()
+ const startingMonth = (currentMonth + 12 - 6) % 12
+ const monthNames = []
 
-  for (let i = startingMonth; i < startingMonth + 6; i++) {
-    const monthIndex = i % 12;
-    monthNames.push(months[monthIndex]);
-  }
+ for (let i = startingMonth; i < startingMonth + 6; i++) {
+  const monthIndex = i % 12
+  monthNames.push(months[monthIndex])
+ }
 
-  return monthNames;
+ return monthNames
 }
 
 function getDateSixMonthsAgo() {
-  const currentDate = new Date();
-  const sixMonthsAgo = new Date(currentDate.getFullYear(), currentDate.getMonth()-6, currentDate.getDate());
-  return sixMonthsAgo;
+ const currentDate = new Date()
+ const sixMonthsAgo = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth() - 6,
+  currentDate.getDate()
+ )
+ return sixMonthsAgo
 }
 
-//write a function with an input parameter [
-  // {
-  //   amount: 0.5,
-  //   date: '2023-06-25T13:28:03.344Z',
-  //   from: '37822288873870181035846030',
-  //   to: '74213041477477406320783754',
-  //  },
-  //  {
-  //   amount: 66,
-  //   date: '2023-06-25T13:21:06.156Z',
-  //   from: '37822288873870181035846030',
-  //   to: '36246277668464257432003354',
-  //  },
-  //  {
-  //   amount: 5222,
-  //   date: '2023-02-25T08:27:01.077Z',
-  //   from: '74213041477477406320783754',
-  //   to: '37822288873870181035846030',
-  //  },
-  // ] and converting to group data by month and year
+function returnDataLastSixMonths(data) {
+  const today = new Date()
+  let month = today.getMonth()
+  let year = today.getFullYear()-2000
+ month -= 6
+  if (month < 0) {
+   month += 12
+   year--
+
+  }
+  const dataRevers = data.reverse()
+  const result = []
+  dataRevers.forEach(dataMonths=>{
+    if((dataMonths.year > year )){
+      result.push(dataMonths)
+    }
+  })
+  return result
+}
