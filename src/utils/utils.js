@@ -173,7 +173,7 @@ function returnDataLastSixMonths(data) {
   const dataRevers = data.reverse()
   const result = []
   dataRevers.forEach(dataMonths=>{
-    if((dataMonths.year > year )){
+    if((dataMonths.year >= year )){
       result.push(dataMonths)
     }
   })

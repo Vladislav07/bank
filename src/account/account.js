@@ -25,7 +25,7 @@ export default class AccountPage {
   this.titleChart = new TitleSection('Динамика баланса', 'chart')
   this.moneyTransferOperation = moneyTransferOperation_
   this.tag = el(`.chart__balance`, {
-   id: 'chart',
+   id: 'chart_account',
   })
   setChildren(this.sectionChart, [this.titleChart, this.tag])
   this.history = new History(this.container, this.prefix)
@@ -46,10 +46,7 @@ export default class AccountPage {
 
    this.sectionChart,
   ])
-
-  setTimeout(() => {
    drawChart(balanceUser, this.tag)
-  }, 1500)
 
   mount(this.accountPage, this.container)
   mount(this.container,  this.transactionForm)
