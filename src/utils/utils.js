@@ -86,16 +86,13 @@ export function SortDataTransaction(transOut, amount, account) {
   }
  })
 
- console.log(returnDataLastSixMonths(dataChart))
+ console.log(getDataLast(dataChart,6))
 
- return returnDataLastSixMonths(dataChart)
+ return getDataLast(dataChart, 6)
 }
 
 function isOut(transaction, account) {
- if (account === transaction) {
-  return true
- }
- return false
+ return (account === transaction)
 }
 
 const months = [
@@ -121,18 +118,25 @@ function EqualDate(one, second) {
  }
 }
 
-function getSixMonthsAgo() {
+function getDataLast(data, period) {
  var today = new Date()
  var month = today.getMonth()
- var year = today.getFullYear()
+ var year = today.getFullYear()-2000
 
- month -= 6
+ month -= period
  if (month < 0) {
   month += 12
   year--
  }
 
- return month + 1 + '/' + year
+ const dataRevers = data.reverse()
+ const result = []
+ dataRevers.forEach(dataMonths=>{
+   if((dataMonths.year >= year )){
+     result.push(dataMonths)
+   }
+ })
+ return result
 }
 
 function getMonthNames() {
@@ -164,7 +168,7 @@ function returnDataLastSixMonths(data) {
   const today = new Date()
   let month = today.getMonth()
   let year = today.getFullYear()-2000
- month -= 6
+  month -= 6
   if (month < 0) {
    month += 12
    year--

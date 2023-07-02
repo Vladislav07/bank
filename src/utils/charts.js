@@ -44,78 +44,56 @@ function drawChart1(balanceUser, tag) {
  const chart = new GoogleCharts.api.visualization.ColumnChart(tag)
  const minValueUser = findMinMaxValue(balanceUser)[0]
  const maxValueUser = findMinMaxValue(balanceUser)[1]
+ options = {
+  xAxis: {
+   1: {
+    title: 'Y',
+    minValue: 0,
+    maxValue: maxValueUser,
+   },
+  },
+  series: {
+   0: {
+    targetAxisIndex: 1,
+   },
+   1: {
+    targetAxisIndex: 0,
+   },
+  },
+  vAxis: {
+   format: '#',
+   gridlines: {
+    color: '#fff',
+    count: 3,
+   },
+  },
+  chartArea: {
+   width: '80%',
+   height: '90%',
+   backgroundColor: {
+    stroke: '#000',
+    strokeWidth: 1,
+   },
+  },
+  backgroundColor: {
+   strokeWidth: 0,
+  },
+  isStacked: true,
+  legend: 'none',
+ }
  switch (tag.id) {
   case 'chart_account':
-   options = {
-   // width: 510,
-    //heigth:180,
-    xAxis: {
-
-
-     1: {
-      title: 'Y',
-      minValue: 0,
-      maxValue: maxValueUser,
-
-     },
-    },
-    series: {
-     0: {
-      targetAxisIndex: 1,
-     },
-     1: {
-      targetAxisIndex: 0,
-     },
-    },
-
-    vAxis: {
-    format: '#',
-
-    gridlines: {
-     color: '#fff',
-     count: 3,
-    },
-    },
-    chartArea: {
-      'width': '80%',
-      'height': '90%',
-      
-      backgroundColor: {
-          stroke: '#000',
-          strokeWidth: 1
-      },
-    },
-    backgroundColor: {
-     strokeWidth: 0,
-    },
-
-    isStacked: true,
-    legend: 'none',
-   }
 
    chart.draw(dataChart(GetData(balanceUser)), options)
    break
 
   case 'chart-history':
-   options = {
-    width: 1240,
-    backgroundColor: {
-     strokeWidth: 0,
-    },
-    legend: 'none',
-   }
+
    chart.draw(dataChart(GetData(balanceUser)), options)
    break
 
   case 'chart-detail':
-   options = {
-    width: 1240,
-    backgroundColor: {
-     strokeWidth: 1,
-    },
-    legend: 'none',
-    isStacked: true,
-   }
+
    chart.draw(WithAccum(GetDataWithAccumulation(balanceUser)), options)
    break
 
@@ -127,7 +105,7 @@ function drawChart1(balanceUser, tag) {
 
 export function drawChart(balanceUser, tag) {
  GoogleCharts.load(() => {
-  drawChart1(balanceUser, document.getElementById('chart_account'))
+  drawChart1(balanceUser, tag)
  })
 }
 
@@ -148,12 +126,12 @@ function dataChart(monthlySummary) {
 }
 
 function findMinMaxValue(data) {
-  const result = new Array(2)
-  const temp =[]
-  data.forEach(element => {
-    temp.push(element.balance)
-  });
-  result[0]=Math.min.apply(null, temp)
-  result[1]=Math.max.apply(null,temp)
-  return result
+ const result = new Array(2)
+ const temp = []
+ data.forEach((element) => {
+  temp.push(element.balance)
+ })
+ result[0] = Math.min.apply(null, temp)
+ result[1] = Math.max.apply(null, temp)
+ return result
 }

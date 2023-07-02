@@ -26,7 +26,7 @@ export default function AccountController(number) {
   }
 
   LoadDataList(data.account)
-  const chart = document.querySelector('#chart')
+  const chart = document.querySelector('#chart_account')
   chart.addEventListener('click', (e) => {
    e.preventDefault()
    router.navigate(`balance/${number}`)
@@ -61,7 +61,7 @@ function TransformationTrans(trans) {
    date: d,
   })
  })
- return transaction
+ return transaction.reverse()
 }
 
 function getListTransferAccounts(transList, account) {

@@ -52,7 +52,6 @@ export default class AccountPage {
   mount(this.container,  this.transactionForm)
   mount(this.body, this.container)
 
- // createTransaction(this.container, this.prefix, moneyTransferOperation)
  }
 
   LoadTableHistory(transactions) {

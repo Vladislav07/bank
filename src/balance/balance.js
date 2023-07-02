@@ -3,7 +3,7 @@ import './_balance.scss'
 import { accountDetails } from '../utils/server_access'
 import { drawChart } from '../utils/charts'
 import { SortDataTransaction } from '../utils/utils'
-import history from '../history/history'
+import History from '../history/history'
 
 import {
  Page,
@@ -30,6 +30,8 @@ function getBalance(number) {
   id: 'chart-detail',
  })
 
+ const  history = new History(container, prefix)
+
  setChildren(sectionChartHistory, [titleChartHistory, tagHistory])
  setChildren(sectionChartDetail, [titleChartDetail, tagDetail])
  mount(getBalance, container)
@@ -48,7 +50,7 @@ function getBalance(number) {
     ]),
     sectionChartHistory,
     sectionChartDetail,
-    history(data.transactions, null, prefix),
+    history.LoadTable(data.transactions),
    ])
    return SortDataTransaction(data.transactions, data.balance, data.account)
   })
