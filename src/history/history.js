@@ -3,26 +3,6 @@ import './_history.scss'
 import { Container, Section, TitleSection } from '../base/base'
 import tabulator from '../table/tabulator'
 
-function getHistory(transactions, body, parent) {
- const prefix = 'history'
- const section = new Section(prefix, parent)
- const container = new Container(prefix)
- const tag = el(`.${prefix}__table`, {
-  id: 'table',
- })
- mount(container, new TitleSection('История переводов', prefix))
- mount(container, tag)
- mount(section, container)
-
- tabulator(transactions.slice(1, 5), tag)
- if (body === null) {
-  return section
- } else {
-  mount(body, section)
- }
-}
-
-//export { getHistory as default }
 
 export default class History {
  constructor(bodyOut, parentOut) {

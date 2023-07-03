@@ -2,8 +2,10 @@ import { el, mount, setChildren } from 'redom'
 import './_balance.scss'
 import { accountDetails } from '../utils/server_access'
 import { drawChart } from '../utils/charts'
-import { SortDataTransaction } from '../utils/utils'
+import { SortDataTransaction, TransformationTrans } from '../utils/utils'
 import History from '../history/history'
+import { Loader } from '../base/base'
+import '../utils/_loader.scss'
 
 import {
  Page,
@@ -15,52 +17,68 @@ import {
  TitleSection,
 } from '../base/base'
 
-function getBalance(number) {
- const prefix = 'balance'
- const getBalance = new Page(prefix)
- const container = new Container(prefix)
- const sectionChartHistory = new Section('chart-history', prefix)
- const titleChartHistory = new TitleSection('История баланса', 'chart-history')
- const sectionChartDetail = new Section('chart-detail', prefix)
- const titleChartDetail = new TitleSection('История баланса', 'chart-detail')
- const tagHistory = el(`chart-history__id`, {
-  id: 'chart-history',
- })
- const tagDetail = el(`chart-detail__id`, {
-  id: 'chart-detail',
- })
 
- const  history = new History(container, prefix)
+export default class Balance {
+ constructor(id) {
+  this.body = document.querySelector('#root')
+  this.number = id
+  this.prefix = 'balance'
+  this.page = new Page(this.prefix)
+  this.container = new Container(this.prefix)
+  this.sectionChartHistory = new Section('chart-history', this.prefix)
+  this.titleChartHistory = new TitleSection('История баланса', 'chart-history')
+  this.sectionChartDetail = new Section('chart-detail', this.prefix)
+  this.titleChartDetail = new TitleSection('История баланса', 'chart-detail')
+  this.tagHistory = el(`chart-history__id`, {
+   id: 'chart-history',
+  })
+  this.tagDetail = el(`chart-detail__id`, {
+   id: 'chart-detail',
+  })
 
- setChildren(sectionChartHistory, [titleChartHistory, tagHistory])
- setChildren(sectionChartDetail, [titleChartDetail, tagDetail])
- mount(getBalance, container)
 
- accountDetails(number)
-  .then((data) => {
-   setChildren(container, [
-    new Group(prefix, [
-     new SectionTitle('История баланса', prefix),
-     new Link(`#/account/${number}`, 'Вернуться назад', prefix),
-     el(`h3.${prefix}__number`, number),
-     el(`.${prefix}__residue`, [
-      el(`span.${prefix}__label`, `Баланс`),
-      el(`span.${prefix}__amount`, `${data.balance} руб.`),
+  setChildren(this.sectionChartHistory, [
+   this.titleChartHistory,
+   this.tagHistory,
+  ])
+  setChildren(this.sectionChartDetail, [this.titleChartDetail, this.tagDetail])
+  this.history = new History(this.container, this.prefix)
+  this.loader = new Loader(this.body)
+  this.LoadContent()
+ }
+
+ LoadContent() {
+  accountDetails(this.number)
+   .then((data) => {
+    const spiner = document.querySelector('.loader')
+     spiner.remove()
+
+    setChildren(this.container, [
+     new Group(this.prefix, [
+      new SectionTitle('История баланса', this.prefix),
+      new Link(`#/account/${this.number}`, 'Вернуться назад', this.prefix),
+      el(`h3.${this.prefix}__number`, this.number),
+      el(`.${this.prefix}__residue`, [
+       el(`span.${this.prefix}__label`, `Баланс`),
+       el(`span.${this.prefix}__amount`, `${data.balance} руб.`),
+      ]),
      ]),
-    ]),
-    sectionChartHistory,
-    sectionChartDetail,
-    history.LoadTable(data.transactions),
-   ])
-   return SortDataTransaction(data.transactions, data.balance, data.account)
-  })
-  .then((balanceUser) => {
-   setTimeout(() => {
-    drawChart(balanceUser, tagHistory)
-    drawChart(balanceUser, tagDetail)
-   }, 1500)
-  })
- return getBalance
-}
+     this.sectionChartHistory,
+     this.sectionChartDetail,
 
-export { getBalance as default }
+    ])
+    this.history.LoadTable(TransformationTrans (data.transactions))
+    return SortDataTransaction(data.transactions, data.balance, data.account)
+   })
+   .then((balanceUser) => {
+    balanceUser = balanceUser.slice(0, 11).reverse()
+    setTimeout(() => {
+     drawChart(balanceUser, this.tagHistory)
+     drawChart(balanceUser, this.tagDetail)
+    }, 500)
+      mount(this.page, this.container)
+      mount(this.body, this.page)
+
+   })
+ }
+}

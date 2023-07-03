@@ -1,16 +1,15 @@
+
 //import fetch from 'node-fetch';
 import WebSocket from 'ws'
-
-const user = {
- login: 'developer',
- password: 'skillbox',
-}
+// const user = {
+//  login: 'developer',
+//  password: 'skillbox',
+// }
 
 const cssPromises = {}
-
 let token = ''
 
-export async function authorizationRequest() {
+export async function authorizationRequest(user) {
  try {
   console.log('authorizationRequest')
   const res = await fetch('http://localhost:3000/login', {
@@ -60,7 +59,7 @@ export async function listOfUserAccounts() {
 }
 
 export async function accountDetails(idAccount) {
- //const idAccount = Account[0].account;
+
  try {
 
   const res = await fetch(`http://localhost:3000/account/${idAccount}`, {

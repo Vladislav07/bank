@@ -2,15 +2,21 @@ import '../_base.scss'
 import AccountPage from './account'
 import router from '../index'
 import { SortDataTransaction } from '../utils/utils'
-
+import { Loader } from '../base/base'
+import '../utils/_loader.scss'
 import { accountDetails, fundsTransfer } from '../utils/server_access'
 
 const body = document.querySelector('#root')
 
 export default function AccountController(number) {
+ new Loader(body)
+
  const page = new AccountPage(body, moneyTransferOperation)
  accountDetails(number).then((data) => {
-  console.log(data)
+const spiner =document.querySelector('.loader')
+ spiner.remove()
+
+
   if (data.transactions.length === 0) {
    page.renderBody(data.account, 0, [], [])
   } else {
@@ -20,13 +26,13 @@ export default function AccountController(number) {
     data.account
    )
 
-   page.renderBody(data.account, data.balance, formatDate)
+   page.renderBody(data.account, data.balance, formatDate.slice(0,6).reverse())
    getListTransferAccounts(data.transactions, data.account)
    page.LoadTableHistory(TransformationTrans(data.transactions))
   }
 
   LoadDataList(data.account)
-  const chart = document.querySelector('#chart_account')
+  const chart = document.querySelector('#chart')
   chart.addEventListener('click', (e) => {
    e.preventDefault()
    router.navigate(`balance/${number}`)
@@ -53,7 +59,7 @@ function TransformationTrans(trans) {
  trans.forEach((record) => {
   const temp = new Date(record.date)
   const d =
-   temp.getDate() + '.' + temp.getMonth() + '.' + (temp.getYear() + 1900)
+   temp.getDate() + '.' + (temp.getMonth() + 1)  + '.' + (temp.getYear() + 1900)
   transaction.push({
    from: record.from,
    to: record.to,
@@ -61,7 +67,7 @@ function TransformationTrans(trans) {
    date: d,
   })
  })
- return transaction.reverse()
+ return transaction
 }
 
 function getListTransferAccounts(transList, account) {

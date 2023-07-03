@@ -167,3 +167,12 @@ export class RowTable {
   ])
  }
 }
+
+export class Loader {
+  constructor(root){
+    this.body = root
+    this.el=el('.loader', el('.loader_inner'))
+    mount(this.body, this.el)
+  }
+}
+

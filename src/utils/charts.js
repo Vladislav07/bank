@@ -8,11 +8,11 @@ function GetData(balanceUser) {
   const count = balanceUser.length
   for (let index = 0; index < count; index += 1) {
    const element = balanceUser[index]
-   const temp = [element.mongtn, element.balance] // 'mongtn' was a typo, it should be 'month'
+   const temp = [element.mongtn + '.' + element.year, element.balance]
    monthlySummary.push(temp)
   }
  }
- console.log(monthlySummary)
+
  return monthlySummary
 }
 
@@ -23,7 +23,7 @@ function GetDataWithAccumulation(balanceUser) {
   const count = balanceUser.length
   for (let index = 0; index < count; index += 1) {
    const element = balanceUser[index]
-   const temp = [element.month, element.in, element.out]
+   const temp = [element.mongtn + '.' + element.year, element.in, element.out]
    monthlySummary.push(temp)
   }
  }
@@ -33,7 +33,7 @@ function GetDataWithAccumulation(balanceUser) {
 
 function WithAccum(Summary) {
  const data = GoogleCharts.api.visualization.arrayToDataTable([
-  ['Genre', 'Fantasy & Sci Fi', 'Romance'],
+  ['date', 'out', 'in'],
   ...Summary.filter((item) => item.length > 1),
  ])
  return data
@@ -45,9 +45,9 @@ function drawChart1(balanceUser, tag) {
  const minValueUser = findMinMaxValue(balanceUser)[0]
  const maxValueUser = findMinMaxValue(balanceUser)[1]
  options = {
-  xAxis: {
+  Axis: {
+   0: {},
    1: {
-    title: 'Y',
     minValue: 0,
     maxValue: maxValueUser,
    },
@@ -68,8 +68,10 @@ function drawChart1(balanceUser, tag) {
    },
   },
   chartArea: {
-   width: '80%',
-   height: '90%',
+   width: '90%',
+   height: '85%',
+   left: 0,
+   top: '2px',
    backgroundColor: {
     stroke: '#000',
     strokeWidth: 1,
@@ -83,17 +85,79 @@ function drawChart1(balanceUser, tag) {
  }
  switch (tag.id) {
   case 'chart_account':
-
    chart.draw(dataChart(GetData(balanceUser)), options)
    break
 
   case 'chart-history':
-
+   options = {
+    width: 1240,
+    height: 400,
+    vAxis: {
+     format: '#',
+     gridlines: {
+      color: '#fff',
+      count: 3,
+     },
+    },
+    series: {
+     0: {
+      targetAxisIndex: 1,
+     },
+     1: {
+      targetAxisIndex: 0,
+     },
+    },
+    chartArea: {
+     width: '90%',
+     height: '85%',
+     left: 0,
+     top: '2px',
+     backgroundColor: {
+      stroke: '#000',
+      strokeWidth: 1,
+     },
+    },
+    legend: { position: 'none' },
+   }
    chart.draw(dataChart(GetData(balanceUser)), options)
    break
 
   case 'chart-detail':
+   options = {
+    width: 1240,
+    height: 400,
+    vAxis: {
+     minValue: 0,
+     format: '#',
+     gridlines: {
+      color: '#fff',
+      count: 3,
+     },
+    },
+    series: {
+     0: {
+      targetAxisIndex: 1,
+     },
+     1: {
+      targetAxisIndex: 0,
+     },
+    },
+    chartArea: {
+     width: '90%',
+     height: '85%',
+     left: 0,
+     top: '2px',
+     backgroundColor: {
+      stroke: '#000',
+      strokeWidth: 1,
+     },
+    },
+    legend: { position: 'none' },
+    in:'black',
+  
+    sStacked: 'absolute',
 
+   }
    chart.draw(WithAccum(GetDataWithAccumulation(balanceUser)), options)
    break
 
@@ -107,14 +171,6 @@ export function drawChart(balanceUser, tag) {
  GoogleCharts.load(() => {
   drawChart1(balanceUser, tag)
  })
-}
-
-function getCurrentMonthYear() {
- const now = new Date()
- const currentMonth = now.getMonth() + 1 // getMonth returns 0-indexed month, so add 1
- const currentYear = now.getFullYear()
-
- return { month: currentMonth, year: currentYear }
 }
 
 function dataChart(monthlySummary) {

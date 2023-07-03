@@ -1,9 +1,8 @@
-import { el, mount, setChildren } from 'redom'
 import '../_base.scss'
 import LogOut from './logout'
 import router from '../index'
 
-import { authorizationRequest, loadResourses } from '../utils/server_access'
+import { authorizationRequest } from '../utils/server_access'
 
 const body = document.querySelector('#root')
 
@@ -59,8 +58,15 @@ export default function logOutController() {
  }
 
  function authorizationRequestToController() {
-  //  if(!loginValid || !passwordValid)return;
-  authorizationRequest().then((isOut) => {
+    if(loginValid || passwordValid)return;
+    const loginValue = input[0].value
+    const passwordValue = input[1].value
+    const user = {
+      login :loginValue,
+      password :passwordValue,
+     }
+     console.log(user)
+  authorizationRequest(user).then((isOut) => {
    if (isOut) {
     router.navigate('/list')
    }

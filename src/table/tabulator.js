@@ -9,9 +9,9 @@ export default function tabulator(tabledata, tag) {
 
   rowFormatter: function (row) {
    if (row._row.data.from === '74213041477477406320783754') {
-    row._row.cells[2].element.style.color = 'green'
-   } else {
     row._row.cells[2].element.style.color = 'red'
+   } else {
+    row._row.cells[2].element.style.color ='green'
    }
   },
   layout: 'fitData',

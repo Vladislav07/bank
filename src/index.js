@@ -5,7 +5,7 @@ import currencyController from './currency/currencyController'
 import header from './header/header'
 import pageCurrency from './currency/currency'
 import pageMap from './map/map'
-import getBalance from './balance/balance'
+import Balance from './balance/balance'
 import { ListAccountsController } from './list/controller'
 import AccountController from './account/accountController'
 import logOutController from './logOut/logOutController'
@@ -49,7 +49,9 @@ router
   AccountController(id)
  })
  .on('/balance/:id', ({ data: { id } }) => {
-  render(getBalance(id))
+  clear()
+  beforeRouter()
+  new Balance(id)
  })
  .on('/currency', () => {
   clear()
@@ -57,12 +59,8 @@ router
   currencyController()
  })
  .on('/location', () => {
+
   render(pageMap())
- })
- .on('/kkk', () => {
-  clear()
-  const h2 = el('a', { href: 'list', 'data-navigo': true }, 'kkk')
-  mount(body, h2)
  })
  .resolve()
 
